@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="文件流标准输入流、标准输出流、标准错误流 标准输入流：指向终端输入（一般为键盘，可重定向）。该流能够使程序读取来自终端输入的数据。指针：stdin 标准输出流：指向终端输出（一般为显示器，可重定向）。该流能够使程序把数据打印到终端输出上。指针：stdout 标准错误流：指向终端标准错误输出（一般为显示器）。指针：stderr  输入输出重定向将标准输入设备重定向到data1.txt文件，标准输出设">
+<meta property="og:type" content="article">
+<meta property="og:title" content="学习笔记：C文件操作">
+<meta property="og:url" content="https://wangquanlikun.github.io/2023/03/24/C-Files/index.html">
+<meta property="og:site_name" content="Wangquanlikun&#39;s Page">
+<meta property="og:description" content="文件流标准输入流、标准输出流、标准错误流 标准输入流：指向终端输入（一般为键盘，可重定向）。该流能够使程序读取来自终端输入的数据。指针：stdin 标准输出流：指向终端输出（一般为显示器，可重定向）。该流能够使程序把数据打印到终端输出上。指针：stdout 标准错误流：指向终端标准错误输出（一般为显示器）。指针：stderr  输入输出重定向将标准输入设备重定向到data1.txt文件，标准输出设">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-03-24T10:00:00.000Z">
+<meta property="article:modified_time" content="2023-03-26T03:23:21.425Z">
+<meta property="article:author" content="Wang Quan">
+<meta property="article:tag" content="编程">
+<meta name="twitter:card" content="summary">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>学习笔记：C文件操作</title>
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+      
+<link rel="stylesheet" href="/css/rtl.css">
+
+    
+    <!-- rss -->
+    
+    
+<meta name="generator" content="Hexo 5.4.2"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/">首页</a></li>
+         
+          <li><a href="/about/">关于</a></li>
+         
+          <li><a href="/archives/">归档</a></li>
+         
+          <li><a href="/projects/">项目</a></li>
+         
+          <li><a href="/resource/">资源分享</a></li>
+        
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        
+        <li><a class="icon" href="/2023/03/18/css-moegirl/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">上一篇</span>
+      <span id="i-next" class="info" style="display:none;">下一篇</span>
+      <span id="i-top" class="info" style="display:none;">返回顶部</span>
+      <span id="i-share" class="info" style="display:none;">分享文章</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://wangquanlikun.github.io/2023/03/24/C-Files/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://wangquanlikun.github.io/2023/03/24/C-Files/&text=学习笔记：C文件操作"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://wangquanlikun.github.io/2023/03/24/C-Files/&title=学习笔记：C文件操作"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://wangquanlikun.github.io/2023/03/24/C-Files/&is_video=false&description=学习笔记：C文件操作"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=学习笔记：C文件操作&body=Check out this article: https://wangquanlikun.github.io/2023/03/24/C-Files/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://wangquanlikun.github.io/2023/03/24/C-Files/&title=学习笔记：C文件操作"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://wangquanlikun.github.io/2023/03/24/C-Files/&title=学习笔记：C文件操作"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://wangquanlikun.github.io/2023/03/24/C-Files/&title=学习笔记：C文件操作"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://wangquanlikun.github.io/2023/03/24/C-Files/&title=学习笔记：C文件操作"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://wangquanlikun.github.io/2023/03/24/C-Files/&name=学习笔记：C文件操作&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://wangquanlikun.github.io/2023/03/24/C-Files/&t=学习笔记：C文件操作"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%96%87%E4%BB%B6%E6%B5%81"><span class="toc-number">1.</span> <span class="toc-text">文件流</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A0%87%E5%87%86%E8%BE%93%E5%85%A5%E6%B5%81%E3%80%81%E6%A0%87%E5%87%86%E8%BE%93%E5%87%BA%E6%B5%81%E3%80%81%E6%A0%87%E5%87%86%E9%94%99%E8%AF%AF%E6%B5%81"><span class="toc-number">1.1.</span> <span class="toc-text">标准输入流、标准输出流、标准错误流</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA%E9%87%8D%E5%AE%9A%E5%90%91"><span class="toc-number">1.2.</span> <span class="toc-text">输入输出重定向</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%96%87%E4%BB%B6%E7%9A%84%E6%89%93%E5%BC%80%E4%B8%8E%E5%85%B3%E9%97%AD"><span class="toc-number">2.</span> <span class="toc-text">文件的打开与关闭</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BC%93%E5%86%B2%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F"><span class="toc-number">2.1.</span> <span class="toc-text">缓冲文件系统</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#FILE%E7%B1%BB%E5%9E%8B"><span class="toc-number">2.2.</span> <span class="toc-text">FILE类型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AF%B9%E6%96%87%E4%BB%B6%E7%9A%84%E6%93%8D%E4%BD%9C"><span class="toc-number">2.3.</span> <span class="toc-text">对文件的操作</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E2%85%A0-%E6%96%87%E4%BB%B6%E7%9A%84%E6%89%93%E5%BC%80"><span class="toc-number">2.3.1.</span> <span class="toc-text">Ⅰ.文件的打开</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E6%89%93%E5%BC%80%E6%96%87%E4%BB%B6%E7%9A%84%E6%93%8D%E4%BD%9C%E6%96%B9%E5%BC%8F"><span class="toc-number">2.3.1.1.</span> <span class="toc-text">打开文件的操作方式</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E2%85%A1-%E6%96%87%E4%BB%B6%E7%9A%84%E5%85%B3%E9%97%AD"><span class="toc-number">2.3.2.</span> <span class="toc-text">Ⅱ.文件的关闭</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%96%87%E4%BB%B6%E6%8C%87%E9%92%88"><span class="toc-number">3.</span> <span class="toc-text">文件指针</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%96%87%E4%BB%B6%E8%AF%BB%E5%8F%96"><span class="toc-number">4.</span> <span class="toc-text">文件读取</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%A4%E6%96%AD%E6%96%87%E4%BB%B6%E6%98%AF%E5%90%A6%E8%AF%BB%E5%88%B0%E6%96%87%E4%BB%B6%E5%B0%BE"><span class="toc-number">4.1.</span> <span class="toc-text">判断文件是否读到文件尾</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E2%85%A0-%E8%AF%BB%EF%BC%8F%E5%86%99%E6%96%87%E4%BB%B6%E4%B8%AD%E7%9A%84%E4%B8%80%E4%B8%AA%E5%AD%97%E7%AC%A6%EF%BC%88%E6%96%87%E6%9C%AC%E6%96%87%E4%BB%B6%EF%BC%89"><span class="toc-number">4.2.</span> <span class="toc-text">Ⅰ.读／写文件中的一个字符（文本文件）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E2%85%A1-%E8%AF%BB%EF%BC%8F%E5%86%99%E4%B8%80%E4%B8%AA%E5%AD%97%E7%AC%A6%E4%B8%B2%EF%BC%88%E6%96%87%E6%9C%AC%E6%96%87%E4%BB%B6%EF%BC%89"><span class="toc-number">4.3.</span> <span class="toc-text">Ⅱ.读／写一个字符串（文本文件）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E2%85%A2-%E5%AF%B9%E6%96%87%E4%BB%B6%E8%BF%9B%E8%A1%8C%E6%A0%BC%E5%BC%8F%E5%8C%96%E8%AF%BB%EF%BC%8F%E5%86%99%EF%BC%88%E6%96%87%E6%9C%AC%E6%96%87%E4%BB%B6%EF%BC%89"><span class="toc-number">4.4.</span> <span class="toc-text">Ⅲ.对文件进行格式化读／写（文本文件）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E2%85%A3-%E8%AF%BB%EF%BC%8F%E5%86%99%E4%B8%80%E4%B8%AA%E6%95%B0%E6%8D%AE%E5%9D%97%EF%BC%88%E4%BA%8C%E8%BF%9B%E5%88%B6%E6%96%87%E4%BB%B6%EF%BC%89"><span class="toc-number">4.5.</span> <span class="toc-text">Ⅳ.读／写一个数据块（二进制文件）</span></a></li></ol></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        学习笔记：C文件操作
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">Wang Quan</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2023-03-24T10:00:00.000Z" itemprop="datePublished">2023-03-24</time>
+        
+      
+    </div>
+
+
+      
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link-link" href="/tags/%E7%BC%96%E7%A8%8B/" rel="tag">编程</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <h2 id="文件流"><a href="#文件流" class="headerlink" title="文件流"></a>文件流</h2><h3 id="标准输入流、标准输出流、标准错误流"><a href="#标准输入流、标准输出流、标准错误流" class="headerlink" title="标准输入流、标准输出流、标准错误流"></a>标准输入流、标准输出流、标准错误流</h3><ol>
+<li>标准输入流：指向终端输入（一般为键盘，可重定向）。该流能够使程序读取来自终端输入的数据。<br>指针：<code>stdin</code></li>
+<li>标准输出流：指向终端输出（一般为显示器，可重定向）。该流能够使程序把数据打印到终端输出上。<br>指针：<code>stdout</code></li>
+<li>标准错误流：指向终端标准错误输出（一般为显示器）。<br>指针：<code>stderr</code></li>
+</ol>
+<h3 id="输入输出重定向"><a href="#输入输出重定向" class="headerlink" title="输入输出重定向"></a>输入输出重定向</h3><p>将标准输入设备重定向到data1.txt文件，标准输出设备重定向到data2.txt文件：<br>CMD <code>test &lt;data1.txt &gt;data2.txt</code></p>
+<h2 id="文件的打开与关闭"><a href="#文件的打开与关闭" class="headerlink" title="文件的打开与关闭"></a>文件的打开与关闭</h2><h3 id="缓冲文件系统"><a href="#缓冲文件系统" class="headerlink" title="缓冲文件系统"></a>缓冲文件系统</h3><p>系统自动地在内存区为程序中每一个正在使用的文件开辟一个文件缓冲区</p>
+<p><code>int fflush(FILE *fPtr);</code></p>
+<ul>
+<li>清理一个文件的缓冲区。</li>
+<li>参数<code>fPtr</code>是打开文件时由<code>fopen()</code>函数返回的FILE指针。</li>
+<li>对于以写方式打开的文件，函数将缓冲区中的数据写入磁盘文件。</li>
+<li>对于以读方式打开的文件，函数将缓冲区清空。</li>
+</ul>
+<p><code>int flushall(void);</code></p>
+<ul>
+<li>用于清理所有文件的缓冲区。</li>
+<li>返回打开着的文件个数。</li>
+</ul>
+<h3 id="FILE类型"><a href="#FILE类型" class="headerlink" title="FILE类型"></a>FILE类型</h3><p>C系统为了处理文件，给每个打开的文件都在内存中开辟一片区域，用于存放文件的有关信息<br>FILE类型由系统定义（见<code>&lt;stdio.h&gt;</code>）<br>用法：<code>FILE * fPtr;</code> 用fPtr指向要操作的文件</p>
+<h3 id="对文件的操作"><a href="#对文件的操作" class="headerlink" title="对文件的操作"></a>对文件的操作</h3><p>打开文件－&gt;读或写文件－&gt;关闭文件</p>
+<h4 id="Ⅰ-文件的打开"><a href="#Ⅰ-文件的打开" class="headerlink" title="Ⅰ.文件的打开"></a>Ⅰ.文件的打开</h4><p><code>fopen()</code>函数<br>打开以filename所指向的字符串为文件名的文件，使之与一个流关联。返回一个指向FILE类型结构变量的指针<br><code>fPtr = fopen (“clients.dat”,“w”);</code> //文件和程序在同一目录<br><code>fPtr = fopen (“C:\\temp\\clients.dat”,“w”);</code> //文件绝对路径。</p>
+<h5 id="打开文件的操作方式"><a href="#打开文件的操作方式" class="headerlink" title="打开文件的操作方式"></a>打开文件的操作方式</h5><ul>
+<li>r:打开一个文本文件，可以读取文件</li>
+<li>w:打开一个文本文件，可以写入文件（但会先删除文件原内容）。如果文件不存在，则创建。</li>
+<li>a:打开一个文本文件，可以写入文件，向已有文件的尾部追加内容，如果该文件不存在则创建之</li>
+<li>rb/wb/ab:对二进制文件的操作。r、w、a的含义同ASCII文件操作</li>
+</ul>
+<h4 id="Ⅱ-文件的关闭"><a href="#Ⅱ-文件的关闭" class="headerlink" title="Ⅱ.文件的关闭"></a>Ⅱ.文件的关闭</h4><p><code>fcolse()</code>函数<br><code>fclose(fPtr);</code> //关闭fPtr所指向的文件</p>
+<h2 id="文件指针"><a href="#文件指针" class="headerlink" title="文件指针"></a>文件指针</h2><p>文件中有一个“文件位置指针”，指向下一次读写操作所在字节的整数值。每次读写1个（或1组）数据后，系统自动将文件位置指针移动到下一个读写位置上<br>打开文件时位置指针的起始位置与打开文件的方式有关</p>
+<p><code>rewind()</code>：文件位置指针指向文件头</p>
+<p><code>fseek()</code>:修改文件位置指针使其指向任一字节处</p>
+<ul>
+<li>将指定文件的位置指针，从参照点开始，移动指定的字节数（位移量）</li>
+<li>参照点:<br>SEEK_SET ── 值为0，表示文件头<br>SEEK_CUR ── 值为1，表示当前位置<br>SEEK_END ── 值为2，表示文件尾</li>
+<li>位移量：以参照点为起点，向文件尾方向（位移量&gt;０）或文件头方向（位移量&lt;０）移动的字节数</li>
+</ul>
+<p><code>ftell()</code>：返回文件当前位置的函数</p>
+<h2 id="文件读取"><a href="#文件读取" class="headerlink" title="文件读取"></a>文件读取</h2><h3 id="判断文件是否读到文件尾"><a href="#判断文件是否读到文件尾" class="headerlink" title="判断文件是否读到文件尾"></a>判断文件是否读到文件尾</h3><p>在对ASCII码文件执行读入操作时，如果遇到文件尾，则读操作函数返回一个文件结束标志EOF（其值在头文件<code>stdio.h</code>中被定义为-1）</p>
+<p>库函数<code>feof()</code><br><code>int  feof(FILE *stream);</code><br>在执行读文件操作时，如果遇到文件尾，则函数返回逻辑真（1）；否则，则返回逻辑假（0）。feof()函数同时适用于ASCII码文件和二进制文件<br><code>!feof(fPtr)</code>表示源文件（用于输入）未结束，循环继续</p>
+<h3 id="Ⅰ-读／写文件中的一个字符（文本文件）"><a href="#Ⅰ-读／写文件中的一个字符（文本文件）" class="headerlink" title="Ⅰ.读／写文件中的一个字符（文本文件）"></a>Ⅰ.读／写文件中的一个字符（文本文件）</h3><p><code>fputc()</code> 将一个字符写入指定文件<br><code>int fputc(int c， FILE *stream);</code><br>将c所指定字符写入stream所指向的输出流中<br><code>fputc(c,stdout)</code>等价于<code>putchar(c)</code>，将变量c输出到标准输出设备上</p>
+<p><code>fgetc()</code> 从指定文件读取一个字符<br>从stream所指向的输入流中获取下一个unsigned char类型的字符，并转换成int类型，同时将文件位置指针向前移动1个字节<br><code>ch=fgetc(stdin)</code>等价于<code>ch=getchar()</code>，从标准输入流中读取一个字符</p>
+<h3 id="Ⅱ-读／写一个字符串（文本文件）"><a href="#Ⅱ-读／写一个字符串（文本文件）" class="headerlink" title="Ⅱ.读／写一个字符串（文本文件）"></a>Ⅱ.读／写一个字符串（文本文件）</h3><p><code>fputs()</code> 向文本文件输出一个字符串<br><code>int fputs(const char *s，FILE * stream);</code><br>将s所指向的字符串写入stream所指向的流中(‘\0’不被写入)。同时将文件位置指针向前移动字符串长度个字节,指向下一写入位置<br><code>fputs(s, stdout)</code>等价于<code>puts(s)</code>，将s所指向的字符串写入到标准输出流</p>
+<p><code>fgets()</code> 从文本文件读一个字符串<br><code>char * fgets(char * s，int n，FILE * stream);</code><br>从stream指向的流中读取最多n－1个字符并放到s所指向的数组中，遇到下面情况不再往后读：</p>
+<ol>
+<li>读到新行符‘\n’或者文件结束符（新行符会被读入到s）</li>
+<li>或虽未遇新行符和文件结束符、但已读入n-1个字符。</li>
+</ol>
+<p>最后一个字符读入数组后接着写入结束标志<code>&#39;\0&#39;</code> ，并将文件位置指针向前移动n－1（字符串长度）个字节</p>
+<h3 id="Ⅲ-对文件进行格式化读／写（文本文件）"><a href="#Ⅲ-对文件进行格式化读／写（文本文件）" class="headerlink" title="Ⅲ.对文件进行格式化读／写（文本文件）"></a>Ⅲ.对文件进行格式化读／写（文本文件）</h3><p><code>int  fscanf(FILE * stream，const char * format，输入变量首地址表);</code><br><code>fscanf(stdin,&quot;%d&quot;,&amp;input);</code></p>
+<p><code>int  fprintf(FILE * stream，const char * format ，输出参量表);</code></p>
+<h3 id="Ⅳ-读／写一个数据块（二进制文件）"><a href="#Ⅳ-读／写一个数据块（二进制文件）" class="headerlink" title="Ⅳ.读／写一个数据块（二进制文件）"></a>Ⅳ.读／写一个数据块（二进制文件）</h3><p><code>int  fread(void *buffer，int size，int count，FILE * stream);</code><br>从<code>stream</code>所指向的流中读取数据到<code>buffer</code>所指向的数组中，<code>size</code>表示单个数组元素的大小，最多读取<code>count</code>个数组元素，流的文件位置指针根据成功写入的字节数递增。函数返回成功读入的元素个数。</p>
+<p><code>int  fwrite(void *buffer，int size，int count，FILE * stream);</code><br>将<code>buffer</code>所指向的数组的内容写入<code>stream</code>所指向的流中。<code>size</code>表示单个数组元素的大小，最多写入<code>count</code>个数组元素。流的文件位置指针根据成功写入的字节数递增。函数返回成功写入的元素个数。</p>
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">首页</a></li>
+         
+          <li><a href="/about/">关于</a></li>
+         
+          <li><a href="/archives/">归档</a></li>
+         
+          <li><a href="/projects/">项目</a></li>
+         
+          <li><a href="/resource/">资源分享</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%96%87%E4%BB%B6%E6%B5%81"><span class="toc-number">1.</span> <span class="toc-text">文件流</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A0%87%E5%87%86%E8%BE%93%E5%85%A5%E6%B5%81%E3%80%81%E6%A0%87%E5%87%86%E8%BE%93%E5%87%BA%E6%B5%81%E3%80%81%E6%A0%87%E5%87%86%E9%94%99%E8%AF%AF%E6%B5%81"><span class="toc-number">1.1.</span> <span class="toc-text">标准输入流、标准输出流、标准错误流</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA%E9%87%8D%E5%AE%9A%E5%90%91"><span class="toc-number">1.2.</span> <span class="toc-text">输入输出重定向</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%96%87%E4%BB%B6%E7%9A%84%E6%89%93%E5%BC%80%E4%B8%8E%E5%85%B3%E9%97%AD"><span class="toc-number">2.</span> <span class="toc-text">文件的打开与关闭</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BC%93%E5%86%B2%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F"><span class="toc-number">2.1.</span> <span class="toc-text">缓冲文件系统</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#FILE%E7%B1%BB%E5%9E%8B"><span class="toc-number">2.2.</span> <span class="toc-text">FILE类型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AF%B9%E6%96%87%E4%BB%B6%E7%9A%84%E6%93%8D%E4%BD%9C"><span class="toc-number">2.3.</span> <span class="toc-text">对文件的操作</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E2%85%A0-%E6%96%87%E4%BB%B6%E7%9A%84%E6%89%93%E5%BC%80"><span class="toc-number">2.3.1.</span> <span class="toc-text">Ⅰ.文件的打开</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E6%89%93%E5%BC%80%E6%96%87%E4%BB%B6%E7%9A%84%E6%93%8D%E4%BD%9C%E6%96%B9%E5%BC%8F"><span class="toc-number">2.3.1.1.</span> <span class="toc-text">打开文件的操作方式</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E2%85%A1-%E6%96%87%E4%BB%B6%E7%9A%84%E5%85%B3%E9%97%AD"><span class="toc-number">2.3.2.</span> <span class="toc-text">Ⅱ.文件的关闭</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%96%87%E4%BB%B6%E6%8C%87%E9%92%88"><span class="toc-number">3.</span> <span class="toc-text">文件指针</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%96%87%E4%BB%B6%E8%AF%BB%E5%8F%96"><span class="toc-number">4.</span> <span class="toc-text">文件读取</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%A4%E6%96%AD%E6%96%87%E4%BB%B6%E6%98%AF%E5%90%A6%E8%AF%BB%E5%88%B0%E6%96%87%E4%BB%B6%E5%B0%BE"><span class="toc-number">4.1.</span> <span class="toc-text">判断文件是否读到文件尾</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E2%85%A0-%E8%AF%BB%EF%BC%8F%E5%86%99%E6%96%87%E4%BB%B6%E4%B8%AD%E7%9A%84%E4%B8%80%E4%B8%AA%E5%AD%97%E7%AC%A6%EF%BC%88%E6%96%87%E6%9C%AC%E6%96%87%E4%BB%B6%EF%BC%89"><span class="toc-number">4.2.</span> <span class="toc-text">Ⅰ.读／写文件中的一个字符（文本文件）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E2%85%A1-%E8%AF%BB%EF%BC%8F%E5%86%99%E4%B8%80%E4%B8%AA%E5%AD%97%E7%AC%A6%E4%B8%B2%EF%BC%88%E6%96%87%E6%9C%AC%E6%96%87%E4%BB%B6%EF%BC%89"><span class="toc-number">4.3.</span> <span class="toc-text">Ⅱ.读／写一个字符串（文本文件）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E2%85%A2-%E5%AF%B9%E6%96%87%E4%BB%B6%E8%BF%9B%E8%A1%8C%E6%A0%BC%E5%BC%8F%E5%8C%96%E8%AF%BB%EF%BC%8F%E5%86%99%EF%BC%88%E6%96%87%E6%9C%AC%E6%96%87%E4%BB%B6%EF%BC%89"><span class="toc-number">4.4.</span> <span class="toc-text">Ⅲ.对文件进行格式化读／写（文本文件）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E2%85%A3-%E8%AF%BB%EF%BC%8F%E5%86%99%E4%B8%80%E4%B8%AA%E6%95%B0%E6%8D%AE%E5%9D%97%EF%BC%88%E4%BA%8C%E8%BF%9B%E5%88%B6%E6%96%87%E4%BB%B6%EF%BC%89"><span class="toc-number">4.5.</span> <span class="toc-text">Ⅳ.读／写一个数据块（二进制文件）</span></a></li></ol></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://wangquanlikun.github.io/2023/03/24/C-Files/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://wangquanlikun.github.io/2023/03/24/C-Files/&text=学习笔记：C文件操作"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://wangquanlikun.github.io/2023/03/24/C-Files/&title=学习笔记：C文件操作"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://wangquanlikun.github.io/2023/03/24/C-Files/&is_video=false&description=学习笔记：C文件操作"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=学习笔记：C文件操作&body=Check out this article: https://wangquanlikun.github.io/2023/03/24/C-Files/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://wangquanlikun.github.io/2023/03/24/C-Files/&title=学习笔记：C文件操作"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://wangquanlikun.github.io/2023/03/24/C-Files/&title=学习笔记：C文件操作"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://wangquanlikun.github.io/2023/03/24/C-Files/&title=学习笔记：C文件操作"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://wangquanlikun.github.io/2023/03/24/C-Files/&title=学习笔记：C文件操作"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://wangquanlikun.github.io/2023/03/24/C-Files/&name=学习笔记：C文件操作&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://wangquanlikun.github.io/2023/03/24/C-Files/&t=学习笔记：C文件操作"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> 菜单</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> 目录</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> 分享</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> 返回顶部</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2022-2023
+    Wang Quan
+    <a href="https://icp.gov.moe/?keyword=20230011" target="_blank">萌ICP备20230011号</a>
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/">首页</a></li>
+         
+          <li><a href="/about/">关于</a></li>
+         
+          <li><a href="/archives/">归档</a></li>
+         
+          <li><a href="/projects/">项目</a></li>
+         
+          <li><a href="/resource/">资源分享</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+
+<link rel="stylesheet" href="/lib/justified-gallery/css/justifiedGallery.min.css">
+
+
+    <!-- jquery -->
+
+<script src="/lib/jquery/jquery.min.js"></script>
+
+
+<script src="/lib/justified-gallery/js/jquery.justifiedGallery.min.js"></script>
+
+<!-- clipboard -->
+
+  
+<script src="/lib/clipboard/clipboard.min.js"></script>
+
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"复制到粘贴板!\">";
+    btn += '<i class="far fa-clone"></i>';
+    btn += '</span>'; 
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "复制成功!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Google Analytics -->
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-2J777R8YC3"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-2J777R8YC3');
+    </script>
+
+<!-- Baidu Analytics -->
+
+  <script type="text/javascript">
+        var _hmt = _hmt || [];
+        (function() {
+          var hm = document.createElement("script");
+          hm.src = "https://hm.baidu.com/hm.js?dd82060a2a1d1d8ff7b1ce99595f384a";
+          var s = document.getElementsByTagName("script")[0];
+          s.parentNode.insertBefore(hm, s);
+        })();
+        </script>
+
+<!-- Cloudflare Analytics -->
+
+<!-- Umami Analytics -->
+
+<!-- Disqus Comments -->
+
+
+</body>
+</html>
