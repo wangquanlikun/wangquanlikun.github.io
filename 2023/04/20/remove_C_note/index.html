@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="题目&amp;emsp;&amp;emsp;C语言的注释分为两种，第一种：在一行源代码中“&#x2F;&#x2F;”后的内容为注释内容。第二种:“&#x2F;”与“&#x2F;”之间的内容为注释内容。第三种：程序中只出现了“&#x2F;*”，没有“*&#x2F;”与之对应，那么将“&#x2F;*”后的全部内容都要过滤掉。注意，只要是注释内容，那么注释内容中的字符应该全部忽略，即不起任何的作用。例如“&#x2F;*”与“*&#x2F;”之间如果再有“&#x2F;&#x2F;”，那么“&#x2F;&#x2F;”不应起作用；如果“&#x2F;&#x2F;”再有“&#x2F;*">
+<meta property="og:type" content="article">
+<meta property="og:title" content="有限状态自动机去除C语言注释">
+<meta property="og:url" content="https://wangquanlikun.github.io/2023/04/20/remove_C_note/index.html">
+<meta property="og:site_name" content="Wangquanlikun&#39;s Page">
+<meta property="og:description" content="题目&amp;emsp;&amp;emsp;C语言的注释分为两种，第一种：在一行源代码中“&#x2F;&#x2F;”后的内容为注释内容。第二种:“&#x2F;”与“&#x2F;”之间的内容为注释内容。第三种：程序中只出现了“&#x2F;*”，没有“*&#x2F;”与之对应，那么将“&#x2F;*”后的全部内容都要过滤掉。注意，只要是注释内容，那么注释内容中的字符应该全部忽略，即不起任何的作用。例如“&#x2F;*”与“*&#x2F;”之间如果再有“&#x2F;&#x2F;”，那么“&#x2F;&#x2F;”不应起作用；如果“&#x2F;&#x2F;”再有“&#x2F;*">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-04-20T10:00:00.000Z">
+<meta property="article:modified_time" content="2023-04-21T02:20:15.868Z">
+<meta property="article:author" content="Wang Quan">
+<meta property="article:tag" content="编程">
+<meta name="twitter:card" content="summary">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>有限状态自动机去除C语言注释</title>
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+      
+<link rel="stylesheet" href="/css/rtl.css">
+
+    
+    <!-- rss -->
+    
+    
+<meta name="generator" content="Hexo 5.4.2"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/">首页</a></li>
+         
+          <li><a href="/about/">关于</a></li>
+         
+          <li><a href="/archives/">归档</a></li>
+         
+          <li><a href="/projects/">项目</a></li>
+         
+          <li><a href="/friends/">友链</a></li>
+        
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        
+        <li><a class="icon" href="/2023/03/24/C-Files/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">上一篇</span>
+      <span id="i-next" class="info" style="display:none;">下一篇</span>
+      <span id="i-top" class="info" style="display:none;">返回顶部</span>
+      <span id="i-share" class="info" style="display:none;">分享文章</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://wangquanlikun.github.io/2023/04/20/remove_C_note/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://wangquanlikun.github.io/2023/04/20/remove_C_note/&text=有限状态自动机去除C语言注释"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://wangquanlikun.github.io/2023/04/20/remove_C_note/&title=有限状态自动机去除C语言注释"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://wangquanlikun.github.io/2023/04/20/remove_C_note/&is_video=false&description=有限状态自动机去除C语言注释"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=有限状态自动机去除C语言注释&body=Check out this article: https://wangquanlikun.github.io/2023/04/20/remove_C_note/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://wangquanlikun.github.io/2023/04/20/remove_C_note/&title=有限状态自动机去除C语言注释"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://wangquanlikun.github.io/2023/04/20/remove_C_note/&title=有限状态自动机去除C语言注释"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://wangquanlikun.github.io/2023/04/20/remove_C_note/&title=有限状态自动机去除C语言注释"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://wangquanlikun.github.io/2023/04/20/remove_C_note/&title=有限状态自动机去除C语言注释"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://wangquanlikun.github.io/2023/04/20/remove_C_note/&name=有限状态自动机去除C语言注释&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://wangquanlikun.github.io/2023/04/20/remove_C_note/&t=有限状态自动机去除C语言注释"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%A2%98%E7%9B%AE"><span class="toc-number">1.</span> <span class="toc-text">题目</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%A3%E7%A0%81%E5%AE%9E%E7%8E%B0"><span class="toc-number">2.</span> <span class="toc-text">代码实现</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9C%89%E9%99%90%E7%8A%B6%E6%80%81"><span class="toc-number">2.1.</span> <span class="toc-text">有限状态</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%A3%E7%A0%81"><span class="toc-number">2.2.</span> <span class="toc-text">代码</span></a></li></ol></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        有限状态自动机去除C语言注释
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">Wang Quan</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2023-04-20T10:00:00.000Z" itemprop="datePublished">2023-04-20</time>
+        
+      
+    </div>
+
+
+      
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link-link" href="/tags/%E7%BC%96%E7%A8%8B/" rel="tag">编程</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <h2 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h2><p>&emsp;&emsp;C语言的注释分为两种，第一种：在一行源代码中“<code>//</code>”后的内容为注释内容。第二种:“<code>/</code><em>”与“</em><code>/</code>”之间的内容为注释内容。第三种：程序中只出现了“<code>/*</code>”，没有“<code>*/</code>”与之对应，那么将“<code>/*</code>”后的全部内容都要过滤掉。注意，只要是注释内容，那么注释内容中的字符应该全部忽略，即不起任何的作用。例如“<code>/*</code>”与“<code>*/</code>”之间如果再有“<code>//</code>”，那么“<code>//</code>”不应起作用；如果“<code>//</code>”再有“<code>/*</code>”，那么“<code>/*</code>”也不应起作用。<br>&emsp;&emsp;你的任务是先打开一个名字为<code>dict.dic</code>的文本文件，该文件中前5行每行为1个整数，从第6行开始为5段C语言的源代码。那5个数字代表这5段源代码结束的行数，比如如果第一行的整数为20，第二行的整数为60，则表示从第6行到第20为第一段代码，从第21行到第60为第二段代码。然后根据输入要求将源代码中所有注释过滤掉。</p>
+<h2 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h2><h3 id="有限状态"><a href="#有限状态" class="headerlink" title="有限状态"></a>有限状态</h3><p>对于有限状态自动机的解法：列举出有限状态</p>
+<ul>
+<li>正常读入代码内容：直接输出。对于该题而言，一段代码处理开始</li>
+<li>读入<code>//</code>后的注释内容：忽略，直到匹配的<code>\n</code>换行符出现截至（忽略<code>/*</code>的作用）</li>
+<li>读入<code>/*</code>后的注释内容：忽略，直到匹配的<code>*/</code>出现。若不出现则后面全为注释（忽略<code>//</code>的作用）</li>
+<li>停止读入代码：对于该题而言，一段代码处理结束</li>
+</ul>
+<p>同时，设计不同状态之间的转换关系：</p>
+<ul>
+<li>正常读入<br>1.读入<code>/</code>后：<br>&emsp;①继续读入<code>/</code>，进入<code>//</code>注释模式<br>&emsp;②继续读入<code>*</code>，进入<code>/*</code>注释模式<br>&emsp;③读入其他字符，则<code>/</code>也是代码内容，注意输出</li>
+<li><code>/*</code>注释模式<br>1.读入<code>*</code>后：<br>&emsp;①继续读入<code>/</code>，结束<code>/*</code>注释模式<br>&emsp;②继续读入<code>*</code>，维持读入<code>*</code>后模式<br>&emsp;③读入其他字符，维持<code>/*</code>注释模式</li>
+</ul>
+<h3 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="type">void</span> <span class="title function_">filroperation</span><span class="params">(FILE *fPtr,<span class="type">int</span> a[<span class="number">5</span>])</span>;</span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">    FILE *fPtr;</span><br><span class="line">    fPtr = fopen(<span class="string">&quot;dict.dic&quot;</span>, <span class="string">&quot;r&quot;</span>);</span><br><span class="line">    rewind(fPtr);<span class="comment">//文件指针复位</span></span><br><span class="line">    <span class="type">int</span> a[<span class="number">5</span>];<span class="comment">//5个数字代表这5段源代码结束的行数</span></span><br><span class="line">    <span class="type">int</span> k;</span><br><span class="line">    <span class="keyword">for</span> (k = <span class="number">0</span>; k &lt; <span class="number">5</span>;k++)</span><br><span class="line">        <span class="built_in">fscanf</span>(fPtr, <span class="string">&quot;%d&quot;</span>, &amp;a[k]);</span><br><span class="line">    filroperation(fPtr,a);</span><br><span class="line">    fclose(fPtr);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="type">void</span> <span class="title function_">filroperation</span><span class="params">(FILE *fPtr,<span class="type">int</span> a[<span class="number">5</span>])</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">int</span> line = <span class="number">6</span>, i = <span class="number">0</span>;</span><br><span class="line">    <span class="type">int</span> printnum;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;printnum);<span class="comment">//输出第几组代码</span></span><br><span class="line">    <span class="type">char</span> c;</span><br><span class="line">    <span class="type">int</span> p = <span class="number">0</span>;<span class="comment">//p=1意味着在/**/之间，p=2意味着在//之后</span></span><br><span class="line">    <span class="type">int</span> k = <span class="number">0</span>;<span class="comment">//k=1意味着已经读入了一个/</span></span><br><span class="line">    fgetc(fPtr);</span><br><span class="line">    c = fgetc(fPtr);</span><br><span class="line">    <span class="keyword">while</span>(!feof(fPtr))</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>(c==<span class="string">&#x27;\n&#x27;</span>)</span><br><span class="line">            line++;</span><br><span class="line">        <span class="keyword">if</span>(line==a[i]+<span class="number">1</span>)<span class="comment">//这一组代码读完了</span></span><br><span class="line">        &#123;</span><br><span class="line">            i++;</span><br><span class="line">            <span class="keyword">if</span>(printnum==i+<span class="number">1</span>)</span><br><span class="line">                c = fgetc(fPtr);</span><br><span class="line">            <span class="keyword">if</span>(k==<span class="number">1</span>&amp;&amp;c==<span class="string">&#x27;\n&#x27;</span>&amp;&amp;printnum==i)</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="built_in">printf</span>(<span class="string">&quot;/%c&quot;</span>, c);</span><br><span class="line">            &#125;</span><br><span class="line">            k = <span class="number">0</span>;</span><br><span class="line">            p = <span class="number">0</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(i+<span class="number">1</span>&gt;printnum)</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span>(p==<span class="number">0</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span>(k==<span class="number">0</span>)</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">if</span>(c!=<span class="string">&#x27;/&#x27;</span>&amp;&amp;printnum==i+<span class="number">1</span>)</span><br><span class="line">                    <span class="built_in">printf</span>(<span class="string">&quot;%c&quot;</span>, c);</span><br><span class="line">                <span class="keyword">else</span> <span class="keyword">if</span>(c==<span class="string">&#x27;/&#x27;</span>)</span><br><span class="line">                    k = <span class="number">1</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">if</span>(k==<span class="number">1</span>)</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">if</span>(c==<span class="string">&#x27;/&#x27;</span>)</span><br><span class="line">                &#123;</span><br><span class="line">                    k = <span class="number">0</span>;</span><br><span class="line">                    p = <span class="number">2</span>;</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">else</span> <span class="keyword">if</span>(c==<span class="string">&#x27;*&#x27;</span>)</span><br><span class="line">                &#123;</span><br><span class="line">                    k = <span class="number">0</span>;</span><br><span class="line">                    p = <span class="number">1</span>;</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">else</span></span><br><span class="line">                &#123;</span><br><span class="line">                    k = <span class="number">0</span>;</span><br><span class="line">                    <span class="keyword">if</span>(printnum==i+<span class="number">1</span>)</span><br><span class="line">                        <span class="built_in">printf</span>(<span class="string">&quot;/%c&quot;</span>,c);<span class="comment">//has read‘/’但是不匹配的情况，比如a/b的使用等</span></span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span>(p==<span class="number">1</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span>(k==<span class="number">0</span>&amp;&amp;c==<span class="string">&#x27;*&#x27;</span>)</span><br><span class="line">                k = <span class="number">1</span>;</span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">if</span>(k==<span class="number">1</span>&amp;&amp;c==<span class="string">&#x27;/&#x27;</span>)</span><br><span class="line">            &#123;</span><br><span class="line">                p = <span class="number">0</span>;</span><br><span class="line">                k = <span class="number">0</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">if</span>(k==<span class="number">1</span>&amp;&amp;c==<span class="string">&#x27;*&#x27;</span>)</span><br><span class="line">                k = <span class="number">1</span>;</span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">if</span>(k==<span class="number">1</span>&amp;&amp;c!=<span class="string">&#x27;/&#x27;</span>)</span><br><span class="line">                k = <span class="number">0</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span>(p==<span class="number">2</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span>(c==<span class="string">&#x27;\n&#x27;</span>)</span><br><span class="line">            &#123;</span><br><span class="line">                p = <span class="number">0</span>;</span><br><span class="line">                <span class="keyword">if</span>(printnum==i+<span class="number">1</span>)</span><br><span class="line">                    <span class="built_in">printf</span>(<span class="string">&quot;\n&quot;</span>);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        c = fgetc(fPtr);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">首页</a></li>
+         
+          <li><a href="/about/">关于</a></li>
+         
+          <li><a href="/archives/">归档</a></li>
+         
+          <li><a href="/projects/">项目</a></li>
+         
+          <li><a href="/friends/">友链</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%A2%98%E7%9B%AE"><span class="toc-number">1.</span> <span class="toc-text">题目</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%A3%E7%A0%81%E5%AE%9E%E7%8E%B0"><span class="toc-number">2.</span> <span class="toc-text">代码实现</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9C%89%E9%99%90%E7%8A%B6%E6%80%81"><span class="toc-number">2.1.</span> <span class="toc-text">有限状态</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%A3%E7%A0%81"><span class="toc-number">2.2.</span> <span class="toc-text">代码</span></a></li></ol></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://wangquanlikun.github.io/2023/04/20/remove_C_note/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://wangquanlikun.github.io/2023/04/20/remove_C_note/&text=有限状态自动机去除C语言注释"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://wangquanlikun.github.io/2023/04/20/remove_C_note/&title=有限状态自动机去除C语言注释"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://wangquanlikun.github.io/2023/04/20/remove_C_note/&is_video=false&description=有限状态自动机去除C语言注释"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=有限状态自动机去除C语言注释&body=Check out this article: https://wangquanlikun.github.io/2023/04/20/remove_C_note/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://wangquanlikun.github.io/2023/04/20/remove_C_note/&title=有限状态自动机去除C语言注释"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://wangquanlikun.github.io/2023/04/20/remove_C_note/&title=有限状态自动机去除C语言注释"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://wangquanlikun.github.io/2023/04/20/remove_C_note/&title=有限状态自动机去除C语言注释"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://wangquanlikun.github.io/2023/04/20/remove_C_note/&title=有限状态自动机去除C语言注释"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://wangquanlikun.github.io/2023/04/20/remove_C_note/&name=有限状态自动机去除C语言注释&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://wangquanlikun.github.io/2023/04/20/remove_C_note/&t=有限状态自动机去除C语言注释"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> 菜单</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> 目录</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> 分享</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> 返回顶部</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2022-2023
+    Wang Quan
+    <a href="https://icp.gov.moe/?keyword=20230011" target="_blank">萌ICP备20230011号</a>
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/">首页</a></li>
+         
+          <li><a href="/about/">关于</a></li>
+         
+          <li><a href="/archives/">归档</a></li>
+         
+          <li><a href="/projects/">项目</a></li>
+         
+          <li><a href="/friends/">友链</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+
+<link rel="stylesheet" href="/lib/justified-gallery/css/justifiedGallery.min.css">
+
+
+    <!-- jquery -->
+
+<script src="/lib/jquery/jquery.min.js"></script>
+
+
+<script src="/lib/justified-gallery/js/jquery.justifiedGallery.min.js"></script>
+
+<!-- clipboard -->
+
+  
+<script src="/lib/clipboard/clipboard.min.js"></script>
+
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"复制到粘贴板!\">";
+    btn += '<i class="far fa-clone"></i>';
+    btn += '</span>'; 
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "复制成功!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Google Analytics -->
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-2J777R8YC3"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-2J777R8YC3');
+    </script>
+
+<!-- Baidu Analytics -->
+
+  <script type="text/javascript">
+        var _hmt = _hmt || [];
+        (function() {
+          var hm = document.createElement("script");
+          hm.src = "https://hm.baidu.com/hm.js?dd82060a2a1d1d8ff7b1ce99595f384a";
+          var s = document.getElementsByTagName("script")[0];
+          s.parentNode.insertBefore(hm, s);
+        })();
+        </script>
+
+<!-- Cloudflare Analytics -->
+
+<!-- Umami Analytics -->
+
+<!-- Disqus Comments -->
+
+
+</body>
+</html>
