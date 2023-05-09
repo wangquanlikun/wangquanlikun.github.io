@@ -14,7 +14,7 @@
 <meta property="og:description" content="本文参考ChatGPT的回答整理 (￣y▽,￣)╭ 在基于Hexo创建的个人博客当中管理CSS文件1.修改通用的styl文件&amp;emsp;&amp;emsp;在&#x2F;themes&#x2F;your-theme-name&#x2F;source&#x2F;css&#x2F;目录下有多个styl文件，这些文件通常是由Stylus编写的CSS预处理器文件，最终生成的CSS文件将用于渲染你的网站&amp;emsp;&amp;emsp;如果你希望在所有页面中使用这个效果，你">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2023-03-18T06:00:00.000Z">
-<meta property="article:modified_time" content="2023-04-21T02:19:18.497Z">
+<meta property="article:modified_time" content="2023-04-21T02:25:44.551Z">
 <meta property="article:author" content="Wang Quan">
 <meta property="article:tag" content="教程">
 <meta property="article:tag" content="CSS">
@@ -163,11 +163,11 @@
 <h2 id="HTML-span-的使用"><a href="#HTML-span-的使用" class="headerlink" title="HTML span 的使用"></a>HTML span 的使用</h2><p>HTML的<code>&lt;span&gt;</code>元素用于为文本或其他元素添加样式，而不影响布局。具体来说，<code>&lt;span&gt;</code>元素只是一个用于包装文本的容器，可以在其中添加样式或应用其他属性，例如<code>id</code>或<code>class</code><br>以下是<code>&lt;span&gt;</code>元素的示例用法：</p>
 <ol>
 <li><p>将一段文本标记为特定样式</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;p&gt;这是一段&lt;span class=&quot;highlighted-text&quot;&gt;突出显示的文本&lt;/span&gt;。&lt;/p&gt;</span><br></pre></td></tr></table></figure>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">p</span>&gt;</span>这是一段<span class="tag">&lt;<span class="name">span</span> <span class="attr">class</span>=<span class="string">&quot;highlighted-text&quot;</span>&gt;</span>突出显示的文本<span class="tag">&lt;/<span class="name">span</span>&gt;</span>。<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br></pre></td></tr></table></figure>
 <p>在上面的示例中，<code>&lt;span&gt;</code>元素被用来将文本标记为<code>&quot;highlighted-text&quot;</code>类，以便可以在CSS中定义该类的样式。</p>
 </li>
 <li><p>应用多个属性</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;span id=&quot;username&quot; class=&quot;red bold&quot;&gt;John&lt;/span&gt;</span><br></pre></td></tr></table></figure>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">span</span> <span class="attr">id</span>=<span class="string">&quot;username&quot;</span> <span class="attr">class</span>=<span class="string">&quot;red bold&quot;</span>&gt;</span>John<span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br></pre></td></tr></table></figure>
 <p>在上面的示例中，<code>&lt;span&gt;</code>元素被用于显示用户的用户名，并应用了<code>id</code>和<code>class</code>属性，以便可以通过CSS或JavaScript针对该元素进行样式或操作。</p>
 </li>
 </ol>
