@@ -1,0 +1,77 @@
+body {
+    font-family: Arial, sans-serif;
+    text-align: left;
+    margin: 80px;
+}
+
+label {
+    display: flex;
+    align-items: center;
+}
+.checkbox-label {
+    margin-right: 10px; /* 调整选择框和文本之间的间距 */
+}
+
+.checkbox-label-1fan {
+    margin-right: 10px;
+}
+.checkbox-label-2fan {
+    margin-right: 10px;
+}
+.checkbox-label-3fan {
+    margin-right: 10px;
+}
+.checkbox-label-6fan {
+    margin-right: 10px;
+}
+.checkbox-label-fulu
+.checkbox-label-manguan {
+    margin-right: 10px;
+}
+.checkbox-label-yiman {
+    margin-right: 10px;
+}
+.checkbox-label-doubleyiman {
+    margin-right: 10px;
+}
+
+.input-container {
+    margin-bottom: 20px; /* 设置底部间距为20像素，可以根据需要进行调整 */
+}
+
+#mingke01 {
+    width: 50px; 
+}
+#mingke02 {
+    width: 50px; 
+}
+#anke01 {
+    width: 50px; 
+}
+#anke02 {
+    width: 50px; 
+}
+#minggang01 {
+    width: 50px; 
+}
+#minggang02 {
+    width: 50px; 
+}
+#angang01 {
+    width: 50px; 
+}
+#angang02 {
+    width: 50px; 
+}
+#Dora01 {
+    width: 80px; 
+}
+#Dora02 {
+    width: 80px; 
+}
+#Dora03 {
+    width: 80px; 
+}
+#Dora04 {
+    width: 80px; 
+}

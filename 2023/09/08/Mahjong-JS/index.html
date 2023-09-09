@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="序言&amp;emsp;&amp;emsp;在本人的突发奇想之下，网页版本立直麻将点数计算工具初版堂堂发布。与此同时，你也可以在这里体验基础版的使用。虽然有着极其简陋的设计，单一且毫无技术水平的功能，繁杂低效的代码水平。作为本人首个基于HTML,CSS,Javascript的前端项目，本人将在此次项目中所学习到的有关上述内容的使用整理待用，一则方便自己后续的学习与使用，二则望为大佬有抛砖引玉之功效 在HTML网页">
+<meta property="og:type" content="article">
+<meta property="og:title" content="使用Javascript实现获取网页反馈">
+<meta property="og:url" content="https://wangquanlikun.github.io/2023/09/08/Mahjong-JS/index.html">
+<meta property="og:site_name" content="Wangquanlikun&#39;s Page">
+<meta property="og:description" content="序言&amp;emsp;&amp;emsp;在本人的突发奇想之下，网页版本立直麻将点数计算工具初版堂堂发布。与此同时，你也可以在这里体验基础版的使用。虽然有着极其简陋的设计，单一且毫无技术水平的功能，繁杂低效的代码水平。作为本人首个基于HTML,CSS,Javascript的前端项目，本人将在此次项目中所学习到的有关上述内容的使用整理待用，一则方便自己后续的学习与使用，二则望为大佬有抛砖引玉之功效 在HTML网页">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-09-08T06:00:00.000Z">
+<meta property="article:modified_time" content="2023-09-09T05:01:04.071Z">
+<meta property="article:author" content="Wang Quan">
+<meta property="article:tag" content="教程">
+<meta property="article:tag" content="Javascript">
+<meta name="twitter:card" content="summary">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>使用Javascript实现获取网页反馈</title>
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+      
+<link rel="stylesheet" href="/css/rtl.css">
+
+    
+    <!-- rss -->
+    
+    
+<meta name="generator" content="Hexo 5.4.2"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/">首页</a></li>
+         
+          <li><a href="/about/">关于</a></li>
+         
+          <li><a href="/archives/">归档</a></li>
+         
+          <li><a href="/search/">搜索</a></li>
+         
+          <li><a href="/friends/">友链</a></li>
+        
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        
+        <li><a class="icon" href="/2023/05/09/C-Multithreading/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">上一篇</span>
+      <span id="i-next" class="info" style="display:none;">下一篇</span>
+      <span id="i-top" class="info" style="display:none;">返回顶部</span>
+      <span id="i-share" class="info" style="display:none;">分享文章</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://wangquanlikun.github.io/2023/09/08/Mahjong-JS/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://wangquanlikun.github.io/2023/09/08/Mahjong-JS/&text=使用Javascript实现获取网页反馈"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://wangquanlikun.github.io/2023/09/08/Mahjong-JS/&title=使用Javascript实现获取网页反馈"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://wangquanlikun.github.io/2023/09/08/Mahjong-JS/&is_video=false&description=使用Javascript实现获取网页反馈"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=使用Javascript实现获取网页反馈&body=Check out this article: https://wangquanlikun.github.io/2023/09/08/Mahjong-JS/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://wangquanlikun.github.io/2023/09/08/Mahjong-JS/&title=使用Javascript实现获取网页反馈"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://wangquanlikun.github.io/2023/09/08/Mahjong-JS/&title=使用Javascript实现获取网页反馈"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://wangquanlikun.github.io/2023/09/08/Mahjong-JS/&title=使用Javascript实现获取网页反馈"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://wangquanlikun.github.io/2023/09/08/Mahjong-JS/&title=使用Javascript实现获取网页反馈"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://wangquanlikun.github.io/2023/09/08/Mahjong-JS/&name=使用Javascript实现获取网页反馈&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://wangquanlikun.github.io/2023/09/08/Mahjong-JS/&t=使用Javascript实现获取网页反馈"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BA%8F%E8%A8%80"><span class="toc-number">1.</span> <span class="toc-text">序言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9C%A8HTML%E7%BD%91%E9%A1%B5%E4%B8%AD%E6%8F%92%E5%85%A5CSS%E4%B8%8EJS%E8%84%9A%E6%9C%AC"><span class="toc-number">2.</span> <span class="toc-text">在HTML网页中插入CSS与JS脚本</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%9E%E9%99%85%E5%BA%94%E7%94%A8"><span class="toc-number">3.</span> <span class="toc-text">实际应用</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E2%85%A0-%E9%80%89%E6%8B%A9%E6%A1%86%E4%B8%8E%E4%BF%A1%E6%81%AF%E8%8E%B7%E5%8F%96"><span class="toc-number">3.1.</span> <span class="toc-text">Ⅰ.选择框与信息获取</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E2%85%A1-%E8%BE%93%E5%85%A5%E6%A1%86%E4%B8%8E%E4%BF%A1%E6%81%AF%E8%8E%B7%E5%8F%96"><span class="toc-number">3.2.</span> <span class="toc-text">Ⅱ.输入框与信息获取</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E2%85%A2-%E5%A4%9A%E9%87%8D%E9%80%89%E6%8B%A9%E9%A1%B9%E4%B8%8E%E4%BF%A1%E6%81%AF%E8%8E%B7%E5%8F%96"><span class="toc-number">3.3.</span> <span class="toc-text">Ⅲ.多重选择项与信息获取</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E2%85%A3-%E7%A1%AE%E5%AE%9A%E6%8C%89%E9%92%AE"><span class="toc-number">3.4.</span> <span class="toc-text">Ⅳ.确定按钮</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E2%85%A4-JS%E6%95%B0%E7%90%86%E9%80%BB%E8%BE%91%E7%9A%84%E8%BF%90%E7%AE%97"><span class="toc-number">3.5.</span> <span class="toc-text">Ⅴ.JS数理逻辑的运算</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E2%85%A5-%E5%AE%9E%E7%8E%B0%E7%BD%91%E9%A1%B5%E4%BF%A1%E6%81%AF%E5%8F%8D%E9%A6%88"><span class="toc-number">3.6.</span> <span class="toc-text">Ⅵ.实现网页信息反馈</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#JS%E8%84%9A%E6%9C%AC%E7%9A%84%E9%83%A8%E5%88%86%E8%AF%AD%E6%B3%95%E4%BD%BF%E7%94%A8"><span class="toc-number">4.</span> <span class="toc-text">JS脚本的部分语法使用</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#var%E4%B8%8Elet%E7%B1%BB%E5%9E%8B"><span class="toc-number">4.1.</span> <span class="toc-text">var与let类型</span></a></li></ol></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        使用Javascript实现获取网页反馈
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">Wang Quan</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2023-09-08T06:00:00.000Z" itemprop="datePublished">2023-09-08</time>
+        
+      
+    </div>
+
+
+      
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link-link" href="/tags/Javascript/" rel="tag">Javascript</a>, <a class="tag-link-link" href="/tags/%E6%95%99%E7%A8%8B/" rel="tag">教程</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <h2 id="序言"><a href="#序言" class="headerlink" title="序言"></a>序言</h2><p>&emsp;&emsp;在本人的突发奇想之下，<a target="_blank" rel="noopener" href="https://github.com/wangquanlikun/Mahjong">网页版本立直麻将点数计算工具</a><strong>初版</strong>堂堂发布。与此同时，你也可以在<a href="../../../../Mahjong/"><strong>这里</strong></a>体验基础版的使用。虽然有着极其简陋的设计，单一且毫无技术水平的功能，繁杂低效的代码水平。作为本人首个基于HTML,CSS,Javascript的前端项目，本人将在此次项目中所学习到的有关上述内容的使用整理待用，一则方便自己后续的学习与使用，二则望为大佬有抛砖引玉之功效</p>
+<h2 id="在HTML网页中插入CSS与JS脚本"><a href="#在HTML网页中插入CSS与JS脚本" class="headerlink" title="在HTML网页中插入CSS与JS脚本"></a>在HTML网页中插入CSS与JS脚本</h2><ol>
+<li>内联方式<br>你可以在HTML文件中直接包含JS和CSS代码。这种方式适用于非常小的文件或需要在HTML中动态生成的代码。例如：</li>
+</ol>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">style</span>&gt;</span><span class="language-css"></span></span><br><span class="line"><span class="language-css">        <span class="comment">/* CSS代码 */</span></span></span><br><span class="line"><span class="language-css">    </span><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">        <span class="comment">// JavaScript代码</span></span></span><br><span class="line"><span class="language-javascript">    </span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>   这种方式的缺点是，如果你有多个页面需要使用相同的CSS或JS代码，就需要在每个页面中复制相同的代码，不便于维护。</p>
+<ol start="2">
+<li>外部链接方式<br>这是最常用的方式，允许你在多个页面之间共享相同的JS和CSS文件。使用<code>&lt;link&gt;</code>元素来链接CSS文件，使用<code>&lt;script&gt;</code>元素来链接JS文件。例如：</li>
+</ol>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">link</span> <span class="attr">rel</span>=<span class="string">&quot;stylesheet&quot;</span> <span class="attr">type</span>=<span class="string">&quot;text/css&quot;</span> <span class="attr">href</span>=<span class="string">&quot;styles.css&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">&quot;script.js&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>在上述示例中<code>href</code>属性和<code>src</code>属性指定了CSS和JS文件的路径。<br><code>rel</code>属性定义了链接元素与当前文档之间的关系，<code>type</code>属性定义了链接资源的媒体类型（MIME 类型）<br>&emsp;<br>你可以使用相对路径或绝对路径来指定文件的位置。相对路径是相对于HTML文件的位置，而绝对路径是完整的URL路径。<br>绝对路径：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">link</span> <span class="attr">rel</span>=<span class="string">&quot;stylesheet&quot;</span> <span class="attr">type</span>=<span class="string">&quot;text/css&quot;</span> <span class="attr">href</span>=<span class="string">&quot;https://example.com/css/styles.css&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">&quot;https://example.com/js/script.js&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>你还可以使用CDN来引入公共的JS和CSS库，例如jQuery、Bootstrap等。CDN通常提供高速的全球分发，减轻了服务器负载。</p>
+<h2 id="实际应用"><a href="#实际应用" class="headerlink" title="实际应用"></a>实际应用</h2><h3 id="Ⅰ-选择框与信息获取"><a href="#Ⅰ-选择框与信息获取" class="headerlink" title="Ⅰ.选择框与信息获取"></a>Ⅰ.选择框与信息获取</h3><p><input type="checkbox" id="example001">&emsp;按钮<br>&emsp;<br>对于这样的一个按钮，你可以按下以代表确认选择，也可以再次按下取消选择<br>在HTML当中，它的简单代码如下：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;checkbox&quot;</span> <span class="attr">id</span>=<span class="string">&quot;example001&quot;</span>&gt;</span>按钮</span><br></pre></td></tr></table></figure>
+
+<p>在这里使用了复选框（checkbox）元素。复选框允许用户选择或取消选择一个选项，并且你可以使用JavaScript来记录用户的选择状态。其中，<code>id</code>代表了其唯一确定的关系<br>在Javascript当中，如何确定其是否已经被选择呢？</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> value001 = <span class="number">0</span>;</span><br><span class="line"><span class="keyword">var</span> checkbox001 = <span class="variable language_">document</span>.<span class="title function_">getElementById</span>(<span class="string">&quot;example001&quot;</span>);<span class="comment">//对应其确定的ID</span></span><br><span class="line">checkbox001.<span class="title function_">addEventListener</span>(<span class="string">&quot;change&quot;</span>, <span class="keyword">function</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="keyword">if</span> (checkbox001.<span class="property">checked</span>) &#123;</span><br><span class="line">      value001 = <span class="number">1</span>;<span class="comment">//若选中则变量为1</span></span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      value001 = <span class="number">0</span>;<span class="comment">//若未选中则变量为0</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p>通过声明的变量<code>value001</code>的数值，你可以通过后续编程实现数理逻辑的运算</p>
+<p>如果你需要一次性操作大量的复选框识别呢？对于本工具而言，以所有一番役种为例，每个复选框在对结果的影响当中是等值的。<br>在HTML当中，对于一番役种，我们使用<code>class=&quot;checkbox-label-1fan&quot;</code>标明其属于的类。与此同时，<code>class</code>属性也可以用于CSS当中进行设计优化<br>对于前四个一番役种：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">label</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;checkbox&quot;</span> <span class="attr">id</span>=<span class="string">&quot;riichi&quot;</span> <span class="attr">class</span>=<span class="string">&quot;checkbox-label-1fan&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">span</span> <span class="attr">class</span>=<span class="string">&quot;checkbox-label-1fan&quot;</span>&gt;</span>立直<span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;checkbox&quot;</span> <span class="attr">id</span>=<span class="string">&quot;yifa&quot;</span> <span class="attr">class</span>=<span class="string">&quot;checkbox-label-1fan&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">span</span> <span class="attr">class</span>=<span class="string">&quot;checkbox-label-1fan&quot;</span>&gt;</span>一发<span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;checkbox&quot;</span> <span class="attr">id</span>=<span class="string">&quot;menqianqingzimo&quot;</span> <span class="attr">class</span>=<span class="string">&quot;checkbox-label-1fan&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">span</span> <span class="attr">class</span>=<span class="string">&quot;checkbox-label-1fan&quot;</span>&gt;</span>门前清自摸和<span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;checkbox&quot;</span> <span class="attr">id</span>=<span class="string">&quot;duanyaojiu&quot;</span> <span class="attr">class</span>=<span class="string">&quot;checkbox-label-1fan&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">span</span> <span class="attr">class</span>=<span class="string">&quot;checkbox-label-1fan&quot;</span>&gt;</span>断幺九<span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">label</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>虽然其一一对应的<code>id</code>不同，但是我们注意到，其同属于一个类<code>checkbox-label-1fan</code>下。每标记一个复选框，玩家所获得的番数+1</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> value1fan = <span class="number">0</span>;</span><br><span class="line"><span class="keyword">var</span> checkboxes1fan = <span class="variable language_">document</span>.<span class="title function_">querySelectorAll</span>(<span class="string">&quot;.checkbox-label-1fan&quot;</span>);<span class="comment">//类的名称</span></span><br><span class="line">checkboxes1fan.<span class="title function_">forEach</span>(<span class="keyword">function</span>(<span class="params">checkbox</span>) &#123;</span><br><span class="line">checkbox.<span class="title function_">addEventListener</span>(<span class="string">&quot;change&quot;</span>, <span class="keyword">function</span>(<span class="params"></span>) &#123;</span><br><span class="line">      <span class="keyword">if</span> (checkbox.<span class="property">checked</span>) &#123;</span><br><span class="line">        value1fan++;</span><br><span class="line">      &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        value1fan--;</span><br><span class="line">      &#125;</span><br><span class="line">&#125;);&#125;);</span><br></pre></td></tr></table></figure>
+
+<h3 id="Ⅱ-输入框与信息获取"><a href="#Ⅱ-输入框与信息获取" class="headerlink" title="Ⅱ.输入框与信息获取"></a>Ⅱ.输入框与信息获取</h3><div class="input-container"><label for="example002">输入框 &emsp;&emsp;<input type="number" id="example002"></label></div>
+
+<p>对于这样的一个输入框，你可以在其中输入你想要的数值<br>在HTML当中，它的简单代码如下：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;input-container&quot;</span>&gt;</span><span class="tag">&lt;<span class="name">label</span> <span class="attr">for</span>=<span class="string">&quot;example002&quot;</span>&gt;</span>输入框 <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;number&quot;</span> <span class="attr">id</span>=<span class="string">&quot;example002&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">label</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>与按钮等HTML元素一样，<code>id</code>代表了其唯一确定的关系<br><code>for</code>属性通常用于<code>&lt;label&gt;</code>元素中，用于建立与表单元素之间的关联。当你在<code>&lt;label&gt;</code>元素中使用<code>for</code>属性，并将其值设置为表单元素的<code>id</code>属性的值时，单击<code>&lt;label&gt;</code>元素的文本或标签本身将会触发关联的表单元素。</p>
+<p>如何使用JavaScript来获取和记录用户输入的值呢？如示例：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> <span class="title class_">InputValue</span>;</span><br><span class="line"><span class="title class_">InputValue</span> = <span class="built_in">parseInt</span>(<span class="variable language_">document</span>.<span class="title function_">getElementById</span>(<span class="string">&quot;example002&quot;</span>).<span class="property">value</span>)</span><br></pre></td></tr></table></figure>
+
+<p>其中，<code>parseInt()</code>用于确保将其转换成整型以确保是数字</p>
+<p>若用户不需要输入任何数值，则默认状态下其值为空。为确保算术运算准确，你可以在JS当中，将其初始值赋值为0</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable language_">document</span>.<span class="title function_">getElementById</span>(<span class="string">&quot;example002&quot;</span>).<span class="property">value</span> = <span class="number">0</span>;</span><br></pre></td></tr></table></figure>
+
+<h3 id="Ⅲ-多重选择项与信息获取"><a href="#Ⅲ-多重选择项与信息获取" class="headerlink" title="Ⅲ.多重选择项与信息获取"></a>Ⅲ.多重选择项与信息获取</h3><select id="example003" name="example003">
+    <option value="loli">萝莉</option>
+    <option value="younggirl">幼女</option>
+</select>
+
+<p>对于如上选择框，你可以在有限多项当中选择一项</p>
+<select id="example004" name="example004" multiple>
+    <option value="01">萝莉</option>
+    <option value="02">幼女</option>
+    <option value="03">JS</option>
+    <option value="04">JK</option>
+</select>
+
+<p>用户可以按住<code>Ctrl</code>键（在Windows系统上）或<code>Command</code>键（在Mac系统上）来多选多个选项</p>
+<p>对于其在HTML当中的使用：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">select</span> <span class="attr">id</span>=<span class="string">&quot;example004&quot;</span> <span class="attr">name</span>=<span class="string">&quot;example004&quot;</span> <span class="attr">multiple</span>&gt;</span>//删去multiple属性改为单选</span><br><span class="line">    <span class="tag">&lt;<span class="name">option</span> <span class="attr">value</span>=<span class="string">&quot;01&quot;</span>&gt;</span>萝莉<span class="tag">&lt;/<span class="name">option</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">option</span> <span class="attr">value</span>=<span class="string">&quot;02&quot;</span>&gt;</span>幼女<span class="tag">&lt;/<span class="name">option</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">option</span> <span class="attr">value</span>=<span class="string">&quot;03&quot;</span>&gt;</span>JS<span class="tag">&lt;/<span class="name">option</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">option</span> <span class="attr">value</span>=<span class="string">&quot;04&quot;</span>&gt;</span>JK<span class="tag">&lt;/<span class="name">option</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">select</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>在上面的示例中，我们使用<code>&lt;select&gt;</code>元素来创建一个下拉菜单，添加<code>multiple</code>属性允许多选。然后，我们使用<code>&lt;option&gt;</code>元素列出了可供选择的选项，每个选项都有一个<code>value</code>属性，它是在提交表单时将被发送的值，以及显示在下拉菜单中的文本。</p>
+<p>在JavaScript中获取用户所选择的数值：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> selectElement = <span class="variable language_">document</span>.<span class="title function_">getElementById</span>(<span class="string">&quot;example004&quot;</span>);</span><br><span class="line"><span class="keyword">var</span> selectedValue = selectElement.<span class="property">value</span>;</span><br><span class="line"><span class="keyword">var</span> resultValue;</span><br><span class="line">       </span><br><span class="line"><span class="keyword">if</span> (selectedValue === <span class="string">&quot;01&quot;</span>)</span><br><span class="line">    resultValue = <span class="number">1</span>;</span><br><span class="line"><span class="keyword">else</span> <span class="keyword">if</span> (selectedValue === <span class="string">&quot;02&quot;</span>)</span><br><span class="line">    resultValue = <span class="number">2</span>;</span><br></pre></td></tr></table></figure>
+
+<h3 id="Ⅳ-确定按钮"><a href="#Ⅳ-确定按钮" class="headerlink" title="Ⅳ.确定按钮"></a>Ⅳ.确定按钮</h3><p><button onclick="recordInput()">确定</button></p>
+<p>你可以使用如下HTML来构建一个确定按钮：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">button</span> <span class="attr">onclick</span>=<span class="string">&quot;recordInput()&quot;</span>&gt;</span>确定<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>当按下按钮后，将执行<code>recordInput()</code>函数</p>
+<p>在Javascript当中：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">recordInput</span>(<span class="params"></span>)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">/*执行函数*/</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>以执行函数下的指令</p>
+<h3 id="Ⅴ-JS数理逻辑的运算"><a href="#Ⅴ-JS数理逻辑的运算" class="headerlink" title="Ⅴ.JS数理逻辑的运算"></a>Ⅴ.JS数理逻辑的运算</h3><p>&emsp;&emsp;对于立直麻将的符数，求和后对结果进行切上处理，即向上舍入，即个位不是零，则个位变成零，整体加10<br>&emsp;&emsp;与此同时，对于点数，由于日麻点棒的最低计算单位为100，当计算得出总支付点数后，还需要进行切上处理，即十位非零时置为零，百位加一</p>
+<p>在Javascript当中，对于算出的单位点数<code>get_a</code>，庄家自摸，子家每人支付2a的点数，并进行切上处理：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="title class_">Math</span>.<span class="title function_">ceil</span>((<span class="number">2</span>*<span class="built_in">parseInt</span>(get_a))/<span class="number">100</span>)*<span class="number">100</span></span><br></pre></td></tr></table></figure>
+
+<p><code>parseInt()</code>用于确保将其转换成整型以确保是数字。在Javascript当中，<code>var</code>作为动态类型，你可可以进行诸如字符串的运算</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yiman+<span class="string">&quot;倍役满&quot;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="Ⅵ-实现网页信息反馈"><a href="#Ⅵ-实现网页信息反馈" class="headerlink" title="Ⅵ.实现网页信息反馈"></a>Ⅵ.实现网页信息反馈</h3><p>在HTML当中，你可以使用如下方式，表示接下来需要显示的内容：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">span</span> <span class="attr">id</span>=<span class="string">&quot;example005&quot;</span>&gt;</span><span class="symbol">&amp;emsp;</span><span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>在Javascript当中，你可以使用如下方式，显示在HTML页面当中：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable language_">document</span>.<span class="title function_">getElementById</span>(<span class="string">&quot;example005&quot;</span>).<span class="property">textContent</span> = <span class="string">&quot;测试&quot;</span>;<span class="comment">//文字</span></span><br><span class="line"><span class="variable language_">document</span>.<span class="title function_">getElementById</span>(<span class="string">&quot;example005&quot;</span>).<span class="property">textContent</span> = <span class="built_in">parseInt</span>(fan);<span class="comment">//数字</span></span><br><span class="line"><span class="variable language_">document</span>.<span class="title function_">getElementById</span>(<span class="string">&quot;example005&quot;</span>).<span class="property">innerHTML</span> = <span class="string">&quot;&amp;emsp;&quot;</span>;<span class="comment">//HTML实体</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="JS脚本的部分语法使用"><a href="#JS脚本的部分语法使用" class="headerlink" title="JS脚本的部分语法使用"></a>JS脚本的部分语法使用</h2><h3 id="var与let类型"><a href="#var与let类型" class="headerlink" title="var与let类型"></a>var与let类型</h3><p>在JavaScript中，<code>let</code> 和 <code>var</code> 都用于声明变量，但它们在变量作用域和生命周期方面有一些重要的区别。</p>
+<ol>
+<li><p><strong><code>let</code>：</strong></p>
+<ul>
+<li><code>let</code> 是ECMAScript 6（ES6）引入的关键字。</li>
+<li>声明的变量使用 <code>let</code> 具有块级作用域，这意味着它们只在包含它们的代码块（通常是 <code>&#123;&#125;</code> 中）内可见。</li>
+<li>使用 <code>let</code> 声明的变量不会被提升（hoisting），在声明之前访问它们会导致引发暂时性死区（Temporal Dead Zone，TDZ）错误。</li>
+<li><code>let</code> 声明的变量可以被重新赋值。</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> x = <span class="number">10</span>;</span><br><span class="line"><span class="keyword">if</span> (<span class="literal">true</span>) &#123;</span><br><span class="line">  <span class="keyword">let</span> x = <span class="number">20</span>; <span class="comment">// 在此块级作用域内重新声明 x</span></span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(x); <span class="comment">// 输出 20</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(x); <span class="comment">// 输出 10</span></span><br></pre></td></tr></table></figure></li>
+<li><p><strong><code>var</code>：</strong></p>
+<ul>
+<li><code>var</code> 是早期版本的JavaScript中使用的关键字。</li>
+<li>使用 <code>var</code> 声明的变量具有函数级作用域，而不是块级作用域，这意味着它们在包含它们的函数内可见。</li>
+<li><code>var</code> 声明的变量会被提升，这意味着变量的声明会被提升到其所在函数或全局作用域的顶部。</li>
+<li><code>var</code> 声明的变量可以被重新赋值。</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> y = <span class="number">10</span>;</span><br><span class="line"><span class="keyword">if</span> (<span class="literal">true</span>) &#123;</span><br><span class="line">  <span class="keyword">var</span> y = <span class="number">20</span>; <span class="comment">// 在函数级作用域内重新赋值 y</span></span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(y); <span class="comment">// 输出 20</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(y); <span class="comment">// 输出 20，而不是 10</span></span><br></pre></td></tr></table></figure></li>
+</ol>
+<p>总之，<code>let</code> 和 <code>var</code> 都用于声明变量，但由于 <code>let</code> 具有块级作用域、不会被提升以及更严格的变量处理，它通常被认为是更安全和更可预测的选项，尤其是在现代JavaScript中。因此，在编写新代码时，通常建议使用 <code>let</code> 而不是 <code>var</code>。</p>
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">首页</a></li>
+         
+          <li><a href="/about/">关于</a></li>
+         
+          <li><a href="/archives/">归档</a></li>
+         
+          <li><a href="/search/">搜索</a></li>
+         
+          <li><a href="/friends/">友链</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BA%8F%E8%A8%80"><span class="toc-number">1.</span> <span class="toc-text">序言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9C%A8HTML%E7%BD%91%E9%A1%B5%E4%B8%AD%E6%8F%92%E5%85%A5CSS%E4%B8%8EJS%E8%84%9A%E6%9C%AC"><span class="toc-number">2.</span> <span class="toc-text">在HTML网页中插入CSS与JS脚本</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%9E%E9%99%85%E5%BA%94%E7%94%A8"><span class="toc-number">3.</span> <span class="toc-text">实际应用</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E2%85%A0-%E9%80%89%E6%8B%A9%E6%A1%86%E4%B8%8E%E4%BF%A1%E6%81%AF%E8%8E%B7%E5%8F%96"><span class="toc-number">3.1.</span> <span class="toc-text">Ⅰ.选择框与信息获取</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E2%85%A1-%E8%BE%93%E5%85%A5%E6%A1%86%E4%B8%8E%E4%BF%A1%E6%81%AF%E8%8E%B7%E5%8F%96"><span class="toc-number">3.2.</span> <span class="toc-text">Ⅱ.输入框与信息获取</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E2%85%A2-%E5%A4%9A%E9%87%8D%E9%80%89%E6%8B%A9%E9%A1%B9%E4%B8%8E%E4%BF%A1%E6%81%AF%E8%8E%B7%E5%8F%96"><span class="toc-number">3.3.</span> <span class="toc-text">Ⅲ.多重选择项与信息获取</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E2%85%A3-%E7%A1%AE%E5%AE%9A%E6%8C%89%E9%92%AE"><span class="toc-number">3.4.</span> <span class="toc-text">Ⅳ.确定按钮</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E2%85%A4-JS%E6%95%B0%E7%90%86%E9%80%BB%E8%BE%91%E7%9A%84%E8%BF%90%E7%AE%97"><span class="toc-number">3.5.</span> <span class="toc-text">Ⅴ.JS数理逻辑的运算</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E2%85%A5-%E5%AE%9E%E7%8E%B0%E7%BD%91%E9%A1%B5%E4%BF%A1%E6%81%AF%E5%8F%8D%E9%A6%88"><span class="toc-number">3.6.</span> <span class="toc-text">Ⅵ.实现网页信息反馈</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#JS%E8%84%9A%E6%9C%AC%E7%9A%84%E9%83%A8%E5%88%86%E8%AF%AD%E6%B3%95%E4%BD%BF%E7%94%A8"><span class="toc-number">4.</span> <span class="toc-text">JS脚本的部分语法使用</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#var%E4%B8%8Elet%E7%B1%BB%E5%9E%8B"><span class="toc-number">4.1.</span> <span class="toc-text">var与let类型</span></a></li></ol></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://wangquanlikun.github.io/2023/09/08/Mahjong-JS/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://wangquanlikun.github.io/2023/09/08/Mahjong-JS/&text=使用Javascript实现获取网页反馈"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://wangquanlikun.github.io/2023/09/08/Mahjong-JS/&title=使用Javascript实现获取网页反馈"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://wangquanlikun.github.io/2023/09/08/Mahjong-JS/&is_video=false&description=使用Javascript实现获取网页反馈"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=使用Javascript实现获取网页反馈&body=Check out this article: https://wangquanlikun.github.io/2023/09/08/Mahjong-JS/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://wangquanlikun.github.io/2023/09/08/Mahjong-JS/&title=使用Javascript实现获取网页反馈"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://wangquanlikun.github.io/2023/09/08/Mahjong-JS/&title=使用Javascript实现获取网页反馈"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://wangquanlikun.github.io/2023/09/08/Mahjong-JS/&title=使用Javascript实现获取网页反馈"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://wangquanlikun.github.io/2023/09/08/Mahjong-JS/&title=使用Javascript实现获取网页反馈"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://wangquanlikun.github.io/2023/09/08/Mahjong-JS/&name=使用Javascript实现获取网页反馈&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://wangquanlikun.github.io/2023/09/08/Mahjong-JS/&t=使用Javascript实现获取网页反馈"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> 菜单</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> 目录</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> 分享</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> 返回顶部</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2022-2023
+    Wang Quan
+    <a href="https://icp.gov.moe/?keyword=20230011" target="_blank">萌ICP备20230011号</a>
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/">首页</a></li>
+         
+          <li><a href="/about/">关于</a></li>
+         
+          <li><a href="/archives/">归档</a></li>
+         
+          <li><a href="/search/">搜索</a></li>
+         
+          <li><a href="/friends/">友链</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+
+<link rel="stylesheet" href="/lib/justified-gallery/css/justifiedGallery.min.css">
+
+
+    <!-- jquery -->
+
+<script src="/lib/jquery/jquery.min.js"></script>
+
+
+<script src="/lib/justified-gallery/js/jquery.justifiedGallery.min.js"></script>
+
+<!-- clipboard -->
+
+  
+<script src="/lib/clipboard/clipboard.min.js"></script>
+
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"复制到粘贴板!\">";
+    btn += '<i class="far fa-clone"></i>';
+    btn += '</span>'; 
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "复制成功!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Google Analytics -->
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-2J777R8YC3"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-2J777R8YC3');
+    </script>
+
+<!-- Baidu Analytics -->
+
+  <script type="text/javascript">
+        var _hmt = _hmt || [];
+        (function() {
+          var hm = document.createElement("script");
+          hm.src = "https://hm.baidu.com/hm.js?dd82060a2a1d1d8ff7b1ce99595f384a";
+          var s = document.getElementsByTagName("script")[0];
+          s.parentNode.insertBefore(hm, s);
+        })();
+        </script>
+
+<!-- Cloudflare Analytics -->
+
+<!-- Umami Analytics -->
+
+<!-- Disqus Comments -->
+
+
+</body>
+</html>
