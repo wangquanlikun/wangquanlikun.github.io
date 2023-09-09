@@ -14,7 +14,7 @@
 <meta property="og:description" content="序言&amp;emsp;&amp;emsp;在本人的突发奇想之下，网页版本立直麻将点数计算工具初版堂堂发布。与此同时，你也可以在这里体验基础版的使用。虽然有着极其简陋的设计，单一且毫无技术水平的功能，繁杂低效的代码水平。作为本人首个基于HTML,CSS,Javascript的前端项目，本人将在此次项目中所学习到的有关上述内容的使用整理待用，一则方便自己后续的学习与使用，二则望为大佬有抛砖引玉之功效 在HTML网页">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2023-09-08T06:00:00.000Z">
-<meta property="article:modified_time" content="2023-09-09T05:01:04.071Z">
+<meta property="article:modified_time" content="2023-09-09T05:59:25.746Z">
 <meta property="article:author" content="Wang Quan">
 <meta property="article:tag" content="教程">
 <meta property="article:tag" content="Javascript">
@@ -109,7 +109,7 @@
 
     </div>
     <div id="toc">
-      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BA%8F%E8%A8%80"><span class="toc-number">1.</span> <span class="toc-text">序言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9C%A8HTML%E7%BD%91%E9%A1%B5%E4%B8%AD%E6%8F%92%E5%85%A5CSS%E4%B8%8EJS%E8%84%9A%E6%9C%AC"><span class="toc-number">2.</span> <span class="toc-text">在HTML网页中插入CSS与JS脚本</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%9E%E9%99%85%E5%BA%94%E7%94%A8"><span class="toc-number">3.</span> <span class="toc-text">实际应用</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E2%85%A0-%E9%80%89%E6%8B%A9%E6%A1%86%E4%B8%8E%E4%BF%A1%E6%81%AF%E8%8E%B7%E5%8F%96"><span class="toc-number">3.1.</span> <span class="toc-text">Ⅰ.选择框与信息获取</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E2%85%A1-%E8%BE%93%E5%85%A5%E6%A1%86%E4%B8%8E%E4%BF%A1%E6%81%AF%E8%8E%B7%E5%8F%96"><span class="toc-number">3.2.</span> <span class="toc-text">Ⅱ.输入框与信息获取</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E2%85%A2-%E5%A4%9A%E9%87%8D%E9%80%89%E6%8B%A9%E9%A1%B9%E4%B8%8E%E4%BF%A1%E6%81%AF%E8%8E%B7%E5%8F%96"><span class="toc-number">3.3.</span> <span class="toc-text">Ⅲ.多重选择项与信息获取</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E2%85%A3-%E7%A1%AE%E5%AE%9A%E6%8C%89%E9%92%AE"><span class="toc-number">3.4.</span> <span class="toc-text">Ⅳ.确定按钮</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E2%85%A4-JS%E6%95%B0%E7%90%86%E9%80%BB%E8%BE%91%E7%9A%84%E8%BF%90%E7%AE%97"><span class="toc-number">3.5.</span> <span class="toc-text">Ⅴ.JS数理逻辑的运算</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E2%85%A5-%E5%AE%9E%E7%8E%B0%E7%BD%91%E9%A1%B5%E4%BF%A1%E6%81%AF%E5%8F%8D%E9%A6%88"><span class="toc-number">3.6.</span> <span class="toc-text">Ⅵ.实现网页信息反馈</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#JS%E8%84%9A%E6%9C%AC%E7%9A%84%E9%83%A8%E5%88%86%E8%AF%AD%E6%B3%95%E4%BD%BF%E7%94%A8"><span class="toc-number">4.</span> <span class="toc-text">JS脚本的部分语法使用</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#var%E4%B8%8Elet%E7%B1%BB%E5%9E%8B"><span class="toc-number">4.1.</span> <span class="toc-text">var与let类型</span></a></li></ol></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BA%8F%E8%A8%80"><span class="toc-number">1.</span> <span class="toc-text">序言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9C%A8HTML%E7%BD%91%E9%A1%B5%E4%B8%AD%E6%8F%92%E5%85%A5CSS%E4%B8%8EJS%E8%84%9A%E6%9C%AC"><span class="toc-number">2.</span> <span class="toc-text">在HTML网页中插入CSS与JS脚本</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%9E%E9%99%85%E5%BA%94%E7%94%A8"><span class="toc-number">3.</span> <span class="toc-text">实际应用</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E2%85%A0-%E9%80%89%E6%8B%A9%E6%A1%86%E4%B8%8E%E4%BF%A1%E6%81%AF%E8%8E%B7%E5%8F%96"><span class="toc-number">3.1.</span> <span class="toc-text">Ⅰ.选择框与信息获取</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E2%85%A1-%E8%BE%93%E5%85%A5%E6%A1%86%E4%B8%8E%E4%BF%A1%E6%81%AF%E8%8E%B7%E5%8F%96"><span class="toc-number">3.2.</span> <span class="toc-text">Ⅱ.输入框与信息获取</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E2%85%A2-%E5%A4%9A%E9%87%8D%E9%80%89%E6%8B%A9%E9%A1%B9%E4%B8%8E%E4%BF%A1%E6%81%AF%E8%8E%B7%E5%8F%96"><span class="toc-number">3.3.</span> <span class="toc-text">Ⅲ.多重选择项与信息获取</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E2%85%A3-%E7%A1%AE%E5%AE%9A%E6%8C%89%E9%92%AE"><span class="toc-number">3.4.</span> <span class="toc-text">Ⅳ.确定按钮</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E2%85%A4-JS%E6%95%B0%E7%90%86%E9%80%BB%E8%BE%91%E7%9A%84%E8%BF%90%E7%AE%97"><span class="toc-number">3.5.</span> <span class="toc-text">Ⅴ.JS数理逻辑的运算</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E2%85%A5-%E5%AE%9E%E7%8E%B0%E7%BD%91%E9%A1%B5%E4%BF%A1%E6%81%AF%E5%8F%8D%E9%A6%88"><span class="toc-number">3.6.</span> <span class="toc-text">Ⅵ.实现网页信息反馈</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#JS%E8%84%9A%E6%9C%AC%E7%9A%84%E9%83%A8%E5%88%86%E8%AF%AD%E6%B3%95%E4%BD%BF%E7%94%A8"><span class="toc-number">4.</span> <span class="toc-text">JS脚本的部分语法使用</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#var%E4%B8%8Elet%E7%B1%BB%E5%9E%8B-%E2%80%94%E2%80%94From-ChatGPT"><span class="toc-number">4.1.</span> <span class="toc-text">var与let类型 ——From ChatGPT</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AB%8B%E7%9B%B4%E9%BA%BB%E5%B0%86%E7%82%B9%E6%95%B0%E8%AE%A1%E7%AE%97%E7%9B%B8%E5%85%B3"><span class="toc-number">5.</span> <span class="toc-text">立直麻将点数计算相关</span></a></li></ol>
     </div>
   </span>
 </div>
@@ -238,26 +238,84 @@
 <p>在Javascript当中，你可以使用如下方式，显示在HTML页面当中：</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable language_">document</span>.<span class="title function_">getElementById</span>(<span class="string">&quot;example005&quot;</span>).<span class="property">textContent</span> = <span class="string">&quot;测试&quot;</span>;<span class="comment">//文字</span></span><br><span class="line"><span class="variable language_">document</span>.<span class="title function_">getElementById</span>(<span class="string">&quot;example005&quot;</span>).<span class="property">textContent</span> = <span class="built_in">parseInt</span>(fan);<span class="comment">//数字</span></span><br><span class="line"><span class="variable language_">document</span>.<span class="title function_">getElementById</span>(<span class="string">&quot;example005&quot;</span>).<span class="property">innerHTML</span> = <span class="string">&quot;&amp;emsp;&quot;</span>;<span class="comment">//HTML实体</span></span><br></pre></td></tr></table></figure>
 
-<h2 id="JS脚本的部分语法使用"><a href="#JS脚本的部分语法使用" class="headerlink" title="JS脚本的部分语法使用"></a>JS脚本的部分语法使用</h2><h3 id="var与let类型"><a href="#var与let类型" class="headerlink" title="var与let类型"></a>var与let类型</h3><p>在JavaScript中，<code>let</code> 和 <code>var</code> 都用于声明变量，但它们在变量作用域和生命周期方面有一些重要的区别。</p>
+<h2 id="JS脚本的部分语法使用"><a href="#JS脚本的部分语法使用" class="headerlink" title="JS脚本的部分语法使用"></a>JS脚本的部分语法使用</h2><h3 id="var与let类型-——From-ChatGPT"><a href="#var与let类型-——From-ChatGPT" class="headerlink" title="var与let类型 ——From ChatGPT"></a>var与let类型 ——From ChatGPT</h3><p>在JavaScript中，<code>let</code>和<code>var</code>都用于声明变量，但它们在变量作用域和生命周期方面有一些重要的区别。</p>
 <ol>
 <li><p><strong><code>let</code>：</strong></p>
 <ul>
-<li><code>let</code> 是ECMAScript 6（ES6）引入的关键字。</li>
-<li>声明的变量使用 <code>let</code> 具有块级作用域，这意味着它们只在包含它们的代码块（通常是 <code>&#123;&#125;</code> 中）内可见。</li>
-<li>使用 <code>let</code> 声明的变量不会被提升（hoisting），在声明之前访问它们会导致引发暂时性死区（Temporal Dead Zone，TDZ）错误。</li>
-<li><code>let</code> 声明的变量可以被重新赋值。</li>
+<li><code>let</code>是ECMAScript 6（ES6）引入的关键字。</li>
+<li>声明的变量使用<code>let</code>具有块级作用域，这意味着它们只在包含它们的代码块（通常是 <code>&#123;&#125;</code> 中）内可见。</li>
+<li>使用<code>let</code>声明的变量不会被提升（hoisting），在声明之前访问它们会导致引发暂时性死区（Temporal Dead Zone，TDZ）错误。</li>
+<li><code>let</code>声明的变量可以被重新赋值。</li>
 </ul>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> x = <span class="number">10</span>;</span><br><span class="line"><span class="keyword">if</span> (<span class="literal">true</span>) &#123;</span><br><span class="line">  <span class="keyword">let</span> x = <span class="number">20</span>; <span class="comment">// 在此块级作用域内重新声明 x</span></span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(x); <span class="comment">// 输出 20</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(x); <span class="comment">// 输出 10</span></span><br></pre></td></tr></table></figure></li>
 <li><p><strong><code>var</code>：</strong></p>
 <ul>
-<li><code>var</code> 是早期版本的JavaScript中使用的关键字。</li>
-<li>使用 <code>var</code> 声明的变量具有函数级作用域，而不是块级作用域，这意味着它们在包含它们的函数内可见。</li>
-<li><code>var</code> 声明的变量会被提升，这意味着变量的声明会被提升到其所在函数或全局作用域的顶部。</li>
-<li><code>var</code> 声明的变量可以被重新赋值。</li>
+<li><code>var</code>是早期版本的JavaScript中使用的关键字。</li>
+<li>使用<code>var</code>声明的变量具有函数级作用域，而不是块级作用域，这意味着它们在包含它们的函数内可见。</li>
+<li><code>var</code>声明的变量会被提升，这意味着变量的声明会被提升到其所在函数或全局作用域的顶部。</li>
+<li><code>var</code>声明的变量可以被重新赋值。</li>
 </ul>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> y = <span class="number">10</span>;</span><br><span class="line"><span class="keyword">if</span> (<span class="literal">true</span>) &#123;</span><br><span class="line">  <span class="keyword">var</span> y = <span class="number">20</span>; <span class="comment">// 在函数级作用域内重新赋值 y</span></span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(y); <span class="comment">// 输出 20</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(y); <span class="comment">// 输出 20，而不是 10</span></span><br></pre></td></tr></table></figure></li>
 </ol>
-<p>总之，<code>let</code> 和 <code>var</code> 都用于声明变量，但由于 <code>let</code> 具有块级作用域、不会被提升以及更严格的变量处理，它通常被认为是更安全和更可预测的选项，尤其是在现代JavaScript中。因此，在编写新代码时，通常建议使用 <code>let</code> 而不是 <code>var</code>。</p>
+<p>总之，<code>let</code>和<code>var</code>都用于声明变量，但由于<code>let</code>具有块级作用域、不会被提升以及更严格的变量处理，它通常被认为是更安全和更可预测的选项，尤其是在现代JavaScript中。因此，在编写新代码时，通常建议使用<code>let</code>而不是<code>var</code>。</p>
+<h2 id="立直麻将点数计算相关"><a href="#立直麻将点数计算相关" class="headerlink" title="立直麻将点数计算相关"></a>立直麻将点数计算相关</h2><p>参考<a target="_blank" rel="noopener" href="https://zh.moegirl.org.cn/%E6%97%A5%E6%9C%AC%E9%BA%BB%E5%B0%86/%E7%B4%A0%E7%82%B9">萌娘百科/日本麻将/素点</a></p>
+<p>单位点数(a) = 符数 × 2<sup>(2+番数)</sup></p>
+<p>大于等于5番时，单位点数固定：</p>
+<table>
+<thead>
+<tr>
+<th>番数</th>
+<th>名称</th>
+<th>a</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>5番</td>
+<td>满贯</td>
+<td>2000</td>
+</tr>
+<tr>
+<td>6~7番</td>
+<td>跳满</td>
+<td>3000</td>
+</tr>
+<tr>
+<td>8~10番</td>
+<td>倍满</td>
+<td>4000</td>
+</tr>
+<tr>
+<td>11~12番</td>
+<td>三倍满</td>
+<td>6000</td>
+</tr>
+<tr>
+<td>13番</td>
+<td>役满</td>
+<td>8000</td>
+</tr>
+</tbody></table>
+<p>根据身份与和牌方式的不同，和牌时以a为基准进行如下赔付结算： </p>
+<table>
+<thead>
+<tr>
+<th>身份</th>
+<th>点和</th>
+<th>自摸</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>亲</td>
+<td>放铳者支付6a</td>
+<td>每人2a</td>
+</tr>
+<tr>
+<td>子</td>
+<td>放铳者支付4a</td>
+<td>亲支付2a，子支付a</td>
+</tr>
+</tbody></table>
+<p>由于日麻点棒的最低计算单位为100，当计算得出总支付点数后，还需要进行切上处理，即十位非零时置为零，百位加一</p>
 
   </div>
 </article>
@@ -285,7 +343,7 @@
     </div>
 
     <div id="toc-footer" style="display: none">
-      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BA%8F%E8%A8%80"><span class="toc-number">1.</span> <span class="toc-text">序言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9C%A8HTML%E7%BD%91%E9%A1%B5%E4%B8%AD%E6%8F%92%E5%85%A5CSS%E4%B8%8EJS%E8%84%9A%E6%9C%AC"><span class="toc-number">2.</span> <span class="toc-text">在HTML网页中插入CSS与JS脚本</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%9E%E9%99%85%E5%BA%94%E7%94%A8"><span class="toc-number">3.</span> <span class="toc-text">实际应用</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E2%85%A0-%E9%80%89%E6%8B%A9%E6%A1%86%E4%B8%8E%E4%BF%A1%E6%81%AF%E8%8E%B7%E5%8F%96"><span class="toc-number">3.1.</span> <span class="toc-text">Ⅰ.选择框与信息获取</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E2%85%A1-%E8%BE%93%E5%85%A5%E6%A1%86%E4%B8%8E%E4%BF%A1%E6%81%AF%E8%8E%B7%E5%8F%96"><span class="toc-number">3.2.</span> <span class="toc-text">Ⅱ.输入框与信息获取</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E2%85%A2-%E5%A4%9A%E9%87%8D%E9%80%89%E6%8B%A9%E9%A1%B9%E4%B8%8E%E4%BF%A1%E6%81%AF%E8%8E%B7%E5%8F%96"><span class="toc-number">3.3.</span> <span class="toc-text">Ⅲ.多重选择项与信息获取</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E2%85%A3-%E7%A1%AE%E5%AE%9A%E6%8C%89%E9%92%AE"><span class="toc-number">3.4.</span> <span class="toc-text">Ⅳ.确定按钮</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E2%85%A4-JS%E6%95%B0%E7%90%86%E9%80%BB%E8%BE%91%E7%9A%84%E8%BF%90%E7%AE%97"><span class="toc-number">3.5.</span> <span class="toc-text">Ⅴ.JS数理逻辑的运算</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E2%85%A5-%E5%AE%9E%E7%8E%B0%E7%BD%91%E9%A1%B5%E4%BF%A1%E6%81%AF%E5%8F%8D%E9%A6%88"><span class="toc-number">3.6.</span> <span class="toc-text">Ⅵ.实现网页信息反馈</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#JS%E8%84%9A%E6%9C%AC%E7%9A%84%E9%83%A8%E5%88%86%E8%AF%AD%E6%B3%95%E4%BD%BF%E7%94%A8"><span class="toc-number">4.</span> <span class="toc-text">JS脚本的部分语法使用</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#var%E4%B8%8Elet%E7%B1%BB%E5%9E%8B"><span class="toc-number">4.1.</span> <span class="toc-text">var与let类型</span></a></li></ol></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BA%8F%E8%A8%80"><span class="toc-number">1.</span> <span class="toc-text">序言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9C%A8HTML%E7%BD%91%E9%A1%B5%E4%B8%AD%E6%8F%92%E5%85%A5CSS%E4%B8%8EJS%E8%84%9A%E6%9C%AC"><span class="toc-number">2.</span> <span class="toc-text">在HTML网页中插入CSS与JS脚本</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%9E%E9%99%85%E5%BA%94%E7%94%A8"><span class="toc-number">3.</span> <span class="toc-text">实际应用</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E2%85%A0-%E9%80%89%E6%8B%A9%E6%A1%86%E4%B8%8E%E4%BF%A1%E6%81%AF%E8%8E%B7%E5%8F%96"><span class="toc-number">3.1.</span> <span class="toc-text">Ⅰ.选择框与信息获取</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E2%85%A1-%E8%BE%93%E5%85%A5%E6%A1%86%E4%B8%8E%E4%BF%A1%E6%81%AF%E8%8E%B7%E5%8F%96"><span class="toc-number">3.2.</span> <span class="toc-text">Ⅱ.输入框与信息获取</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E2%85%A2-%E5%A4%9A%E9%87%8D%E9%80%89%E6%8B%A9%E9%A1%B9%E4%B8%8E%E4%BF%A1%E6%81%AF%E8%8E%B7%E5%8F%96"><span class="toc-number">3.3.</span> <span class="toc-text">Ⅲ.多重选择项与信息获取</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E2%85%A3-%E7%A1%AE%E5%AE%9A%E6%8C%89%E9%92%AE"><span class="toc-number">3.4.</span> <span class="toc-text">Ⅳ.确定按钮</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E2%85%A4-JS%E6%95%B0%E7%90%86%E9%80%BB%E8%BE%91%E7%9A%84%E8%BF%90%E7%AE%97"><span class="toc-number">3.5.</span> <span class="toc-text">Ⅴ.JS数理逻辑的运算</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E2%85%A5-%E5%AE%9E%E7%8E%B0%E7%BD%91%E9%A1%B5%E4%BF%A1%E6%81%AF%E5%8F%8D%E9%A6%88"><span class="toc-number">3.6.</span> <span class="toc-text">Ⅵ.实现网页信息反馈</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#JS%E8%84%9A%E6%9C%AC%E7%9A%84%E9%83%A8%E5%88%86%E8%AF%AD%E6%B3%95%E4%BD%BF%E7%94%A8"><span class="toc-number">4.</span> <span class="toc-text">JS脚本的部分语法使用</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#var%E4%B8%8Elet%E7%B1%BB%E5%9E%8B-%E2%80%94%E2%80%94From-ChatGPT"><span class="toc-number">4.1.</span> <span class="toc-text">var与let类型 ——From ChatGPT</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AB%8B%E7%9B%B4%E9%BA%BB%E5%B0%86%E7%82%B9%E6%95%B0%E8%AE%A1%E7%AE%97%E7%9B%B8%E5%85%B3"><span class="toc-number">5.</span> <span class="toc-text">立直麻将点数计算相关</span></a></li></ol>
     </div>
 
     <div id="share-footer" style="display: none">
