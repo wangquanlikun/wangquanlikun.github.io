@@ -1,0 +1,35 @@
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    margin: 120px;
+}
+
+label {
+    display: inline-flex;
+    align-items: center;
+}
+.checkbox-label {
+    margin-right: 10px;
+}
+
+table {
+    border-collapse: collapse;
+    display: inline-flex;
+    align-items: center;
+    width: auto;
+}
+
+table, th, td {
+    border: 1px solid black;
+}
+
+th, td {
+    padding: 10px;
+    text-align: center;
+    cursor: pointer;
+}
+
+th:hover, td.selected {
+    background-color: #3498db;
+    color: white;
+}
