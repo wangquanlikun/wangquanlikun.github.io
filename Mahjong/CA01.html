@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<link rel="stylesheet" type="text/css" href="style.css">
+
+    <meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>立直麻将点数计算器</title>
+</head>
+<body>
+    <h1 style="text-align: center;">立直麻将点数计算</h1>
+		<h2>番数计算</h2>
+			<h3>一番役种</h3>
+			
+			<label>
+				<input type="checkbox" id="riichi" class="checkbox-label-1fan">
+				<span class="checkbox-label-1fan">立直</span>
+				<pre>&#09;</pre>
+				<input type="checkbox" id="yifa" class="checkbox-label-1fan">
+				<span class="checkbox-label-1fan">一发</span>
+				<pre>&#09;</pre>
+				<input type="checkbox" id="menqianqingzimo" class="checkbox-label-1fan">
+				<span class="checkbox-label-1fan">门前清自摸和</span>
+				<pre>&#09;</pre>
+				<input type="checkbox" id="duanyaojiu" class="checkbox-label-1fan">
+				<span class="checkbox-label-1fan">断幺九</span>
+			</label>
+
+			<label>
+				<input type="checkbox" id="menfeng" class="checkbox-label-1fan">
+				<span class="checkbox-label-1fan">役牌：自风牌</span>
+				<pre>&#09;</pre>
+				<input type="checkbox" id="changfeng" class="checkbox-label-1fan">
+				<span class="checkbox-label-1fan">役牌：场风牌</span>
+				<pre>&#09;</pre>
+				<input type="checkbox" id="bai" class="checkbox-label-1fan">
+				<span class="checkbox-label-1fan">白</span>
+				<pre>&#09;</pre>
+				<input type="checkbox" id="fa" class="checkbox-label-1fan">
+				<span class="checkbox-label-1fan">發</span>
+				<pre>&#09;</pre>
+				<input type="checkbox" id="zhong" class="checkbox-label-1fan">
+				<span class="checkbox-label-1fan">中</span>
+			</label>
+
+			<label>
+				<input type="checkbox" id="pinghe" class="checkbox-label-1fan">
+				<span class="checkbox-label-1fan">平和</span>
+				<pre>&#09;</pre>
+				<input type="checkbox" id="yibeikou" class="checkbox-label-1fan">
+				<span class="checkbox-label-1fan">一杯口</span>
+				<pre>&#09;</pre>
+				<input type="checkbox" id="qianggang" class="checkbox-label-1fan">
+				<span class="checkbox-label-1fan">抢杠</span>
+				<pre>&#09;</pre>
+				<input type="checkbox" id="lingshang" class="checkbox-label-1fan">
+				<span class="checkbox-label-1fan">岭上开花</span>
+			</label>
+
+			<label>
+				<input type="checkbox" id="haidi" class="checkbox-label-1fan">
+				<span class="checkbox-label-1fan">海底摸月</span>
+				<pre>&#09;</pre>
+				<input type="checkbox" id="hedi" class="checkbox-label-1fan">
+				<span class="checkbox-label-1fan">河底捞鱼</span>
+			</label>
+			&emsp;
+			<div class="input-container"><label for="Dora01">宝牌 &emsp;&emsp;&emsp;<input type="number" id="Dora01"></label></div>
+			<div class="input-container"></div><label for="Dora02">里宝牌 &emsp;&emsp;<input type="number" id="Dora02"></label></div>
+			<div class="input-container"></div><label for="Dora03">赤宝牌 &emsp;&emsp;<input type="number" id="Dora03"></label></div>
+			<div class="input-container"></div><label for="Dora04">拔北宝牌 &emsp;<input type="number" id="Dora04"></label></div>
+
+			<h3>二番役种</h3>
+
+			<label>
+				<input type="checkbox" id="doubleriichi" class="checkbox-label-2fan">
+				<span class="checkbox-label-2fan">两立直</span>
+				<pre>&#09;</pre>
+				<input type="checkbox" id="sansetongke" class="checkbox-label-2fan">
+				<span class="checkbox-label-2fan">三色同刻</span>
+				<pre>&#09;</pre>
+				<input type="checkbox" id="sangangzi" class="checkbox-label-2fan">
+				<span class="checkbox-label-2fan">三杠子</span>
+				<pre>&#09;</pre>
+				<input type="checkbox" id="duidui" class="checkbox-label-2fan">
+				<span class="checkbox-label-2fan">对对和</span>
+			</label>
+			
+			<label>
+				<input type="checkbox" id="sananke" class="checkbox-label-2fan">
+				<span class="checkbox-label-2fan">三暗刻</span>
+				<pre>&#09;</pre>
+				<input type="checkbox" id="xiaosanyuan" class="checkbox-label-2fan">
+				<span class="checkbox-label-2fan">小三元</span>
+				<pre>&#09;</pre>
+				<input type="checkbox" id="hunlaotou" class="checkbox-label-2fan">
+				<span class="checkbox-label-2fan">混老头</span>
+				<pre>&#09;</pre>
+				<input type="checkbox" id="qiduizi" class="checkbox-label-2fan">
+				<span class="checkbox-label-2fan">七对子</span>
+			</label>
+
+			<label>
+				<input type="checkbox" id="hunquan" class="checkbox-label-2fan">
+				<span class="checkbox-label-2fan">混全带幺九</span>
+				<input type="checkbox" id="hunquanxxx" class="checkbox-label-fulu"> （副露）
+				<pre>&#09;</pre>
+				<input type="checkbox" id="yiqi" class="checkbox-label-2fan">
+				<span class="checkbox-label-2fan">一气通贯</span>
+				<input type="checkbox" id="yiqixxx" class="checkbox-label-fulu"> （副露）
+				<pre>&#09;</pre>
+				<input type="checkbox" id="sansetongshun" class="checkbox-label-2fan">
+				<span class="checkbox-label-2fan">三色同顺</span>
+				<input type="checkbox" id="sansetongshunxxx" class="checkbox-label-fulu"> （副露）
+			</label>
+			
+			
+			<h3>三番役种</h3>
+
+			<label>
+				<input type="checkbox" id="erbeikou" class="checkbox-label-3fan">
+				<span class="checkbox-label-3fan">二杯口</span>
+				<pre>&#09;</pre>
+				<input type="checkbox" id="chunquandai" class="checkbox-label-3fan">
+				<span class="checkbox-label-3fan">纯全带幺九</span>
+				<input type="checkbox" id="chunquandaixxx"  class="checkbox-label-fulu"> （副露）
+				<pre>&#09;</pre>
+				<input type="checkbox" id="hunyise" class="checkbox-label-3fan">
+				<span class="checkbox-label-3fan">混一色</span>
+				<input type="checkbox" id="hunyisexxx"  class="checkbox-label-fulu"> （副露）
+			</label>
+			
+			<h3>六番役种</h3>
+
+			<label>
+				<input type="checkbox" id="qingyise" class="checkbox-label-6fan">
+				<span class="checkbox-label-6fan">清一色</span>
+				<input type="checkbox" id="qingyisexxx" class="checkbox-label-fulu"> （副露）
+			</label>
+			
+			
+			<h3>役满</h3>
+			
+			<label>
+				<input type="checkbox" id="tianhe" class="checkbox-label-yiman">
+				<span class="checkbox-label-yiman">天和</span>
+				<pre>&#09;</pre>
+				<input type="checkbox" id="dihe" class="checkbox-label-yiman">
+				<span class="checkbox-label-yiman">地和</span>
+				<pre>&#09;</pre>
+				<input type="checkbox" id="dasanyuan" class="checkbox-label-yiman">
+				<span class="checkbox-label-yiman">大三元</span>
+				<pre>&#09;</pre>
+				<input type="checkbox" id="sianke" class="checkbox-label-yiman">
+				<span class="checkbox-label-yiman">四暗刻</span>
+			</label>
+
+			<label>
+				<input type="checkbox" id="ziyise" class="checkbox-label-yiman">
+				<span class="checkbox-label-yiman">字一色</span>
+				<pre>&#09;</pre>
+				<input type="checkbox" id="luyise" class="checkbox-label-yiman">
+				<span class="checkbox-label-yiman">绿一色</span>
+				<pre>&#09;</pre>
+				<input type="checkbox" id="qinglaotou" class="checkbox-label-yiman">
+				<span class="checkbox-label-yiman">清老头</span>
+				<pre>&#09;</pre>
+				<input type="checkbox" id="guoshiwushuang" class="checkbox-label-yiman">
+				<span class="checkbox-label-yiman">国士无双</span>
+			</label>
+
+			<label>
+				<input type="checkbox" id="xiaosixi" class="checkbox-label-yiman">
+				<span class="checkbox-label-yiman">小四喜</span>
+				<pre>&#09;</pre>
+				<input type="checkbox" id="sigangzi" class="checkbox-label-yiman">
+				<span class="checkbox-label-yiman">四杠子</span>
+				<pre>&#09;</pre>
+				<input type="checkbox" id="jiulianbaodeng" class="checkbox-label-yiman">
+				<span class="checkbox-label-yiman">九莲宝灯</span>
+			</label>
+
+			<h3>两倍役满</h3>
+
+			<label>
+				<input type="checkbox" id="siankedanqi" class="checkbox-label-doubleyiman">
+				<span class="checkbox-label-doubleyiman">四暗刻单骑</span>
+				<pre>&#09;</pre>
+				<input type="checkbox" id="guoshiwushuang13" class="checkbox-label-doubleyiman">
+				<span class="checkbox-label-doubleyiman">国士无双十三面</span>
+				<pre>&#09;</pre>
+				<input type="checkbox" id="chunjiu" class="checkbox-label-doubleyiman">
+				<span class="checkbox-label-doubleyiman">纯正九莲宝灯</span>
+				<pre>&#09;</pre>
+				<input type="checkbox" id="dasixi" class="checkbox-label-doubleyiman">
+				<span class="checkbox-label-doubleyiman">大四喜</span>
+			</label>
+			&emsp;
+			<h3>古役</h3>
+			<details> <summary>点击展开</summary>
+				<label>
+					<b>一番役种</b>&emsp;
+					<input type="checkbox" id="yanfan" class="checkbox-label-1fan">
+					<span class="checkbox-label-1fan">燕返</span>
+					<pre>&#09;</pre>
+					<input type="checkbox" id="gangzhen" class="checkbox-label-1fan">
+					<span class="checkbox-label-1fan">杠振</span>
+					<pre>&#09;</pre>
+					<input type="checkbox" id="shierluotai" class="checkbox-label-1fan">
+					<span class="checkbox-label-1fan">十二落抬</span>
+				</label>
+				<label>
+					<b>二番役种</b>&emsp;
+					<input type="checkbox" id="wumenqi" class="checkbox-label-2fan">
+					<span class="checkbox-label-2fan">五门齐</span>
+					<pre>&#09;</pre>
+					<input type="checkbox" id="sanlianke" class="checkbox-label-2fan">
+					<span class="checkbox-label-2fan">三连刻</span>
+				</label>
+				<label>
+					<b>三番役种</b>&emsp;
+					<input type="checkbox" id="yisesantongshun" class="checkbox-label-3fan">
+					<span class="checkbox-label-3fan">一色三同顺</span>
+					<pre>&#09;</pre>
+				</label>
+				<label>
+					<b>满贯&emsp;&emsp;</b>&emsp;
+					<input type="checkbox" id="yitongmoyue" class="checkbox-label">
+					<span class="checkbox-label">一筒摸月</span>
+					<pre>&#09;</pre>
+					<input type="checkbox" id="jiutonglaoyu" class="checkbox-label">
+					<span class="checkbox-label">九筒捞鱼</span>
+				</label>
+				<label>
+					<b>役满&emsp;&emsp;</b>&emsp;
+					<input type="checkbox" id="dachelun" class="checkbox-label">
+					<span class="checkbox-label">大车轮</span>
+					<pre>&#09;</pre>
+					<input type="checkbox" id="dazhulin" class="checkbox-label">
+					<span class="checkbox-label">大竹林</span>
+					<pre>&#09;</pre>
+					<input type="checkbox" id="dashulin" class="checkbox-label">
+					<span class="checkbox-label">大数邻</span>
+					<pre>&#09;</pre>
+					<input type="checkbox" id="shishangsannian" class="checkbox-label">
+					<span class="checkbox-label">石上三年</span>
+				</label>
+				<label>
+					<b>两倍役满</b>&emsp;
+					<input type="checkbox" id="daqixing" class="checkbox-label">
+					<span class="checkbox-label">大七星</span>
+					<pre>&#09;</pre>
+				</label>
+			</details>
+		
+		<h2>符数计算</h2>
+			<h3>和牌方式</h3>
+			<label>
+				<input type="checkbox" id="zimo" class="checkbox-label">
+				<span class="checkbox-label">自摸（2符）</span>
+				<pre>&#09;</pre>
+				<input type="checkbox" id="menqianqingdianhe" class="checkbox-label">
+				<span class="checkbox-label">门前清点和（10符）</span>
+				<pre>&#09;</pre>
+				<input type="checkbox" id="fuludianhe" class="checkbox-label">
+				<span class="checkbox-label">含副露点和（0符）</span>
+			</label>
+
+			<h3>面子</h3>
+				<p>顺子（0符）</p>
+				<div class="input-container"><label>明刻&emsp;中张（2符）&nbsp;&nbsp;<input type="number" id="mingke01">
+				&emsp;&emsp;
+				幺九（4符）&nbsp;&nbsp;<input type="number" id="mingke02">
+				</label></div>
+
+				<div class="input-container"><label>暗刻&emsp;中张（4符）&nbsp;&nbsp;<input type="number" id="anke01">
+				&emsp;&emsp;
+				幺九（8符）&nbsp;&nbsp;<input type="number" id="anke02">
+				</label></div>
+
+				<div class="input-container"><label>明杠&emsp;中张（8符）&nbsp;&nbsp;<input type="number" id="minggang01">
+				&emsp;&emsp;
+				幺九（16符）<input type="number" id="minggang02">
+				</label></div>
+	
+				<div class="input-container"><label>暗杠&emsp;中张（16符）<input type="number" id="angang01">
+				&emsp;&emsp;
+				幺九（32符）<input type="number" id="angang02">
+				</label></div>
+
+			<h3>雀头</h3>
+				<p>数牌（0符）</p>
+				<p>客风牌（0符）</p>
+				<div class="input-container"><label for="zifengchangfeng">自风牌/场风牌（2符）&emsp;<input type="number" id="zifengchangfeng"></label></div>
+				<div class="input-container"><label for="sanyuan">三元牌（2符）&emsp;&emsp;&emsp; &emsp;<input type="number" id="sanyuan"></label></div>
+
+			<h3>听牌型</h3>
+
+			<label>
+				<input type="checkbox" id="danqi" class="checkbox-label-2fu">
+				<span class="checkbox-label-2fu">单骑（2符）</span>
+				<pre>&#09;</pre>
+				<input type="checkbox" id="bianzhang" class="checkbox-label-2fu">
+				<span class="checkbox-label-2fu">边张（2符）</span>
+				<pre>&#09;</pre>
+				<input type="checkbox" id="kanzhang" class="checkbox-label-2fu">
+				<span class="checkbox-label-2fu">坎张（2符）</span>
+			</label>
+			<label>
+				<input type="checkbox" id="liangmian" class="checkbox-label">
+				<span class="checkbox-label">两面（0符）</span>
+				<pre>&#09;</pre>
+				<input type="checkbox" id="shuangpeng" class="checkbox-label">
+				<span class="checkbox-label">双碰（0符）</span>
+			</label>
+
+			<h3>特殊情况</h3>
+			<label>
+				<input type="checkbox" id="qiduizifushu" class="checkbox-label">
+				<span class="checkbox-label">七对子</span>
+				<pre>&#09;</pre>
+				<input type="checkbox" id="pinghefushu" class="checkbox-label">
+				<span class="checkbox-label">平和</span>
+				<pre>&#09;</pre>
+				<input type="checkbox" id="liujumanguanfushu" class="checkbox-label">
+				<span class="checkbox-label">流局满贯</span>
+				<pre>&#09;</pre>
+				<input type="checkbox" id="guoshiwushuangfushu" class="checkbox-label">
+				<span class="checkbox-label">国士无双</span>
+			</label>
+
+
+		<h2>其它可选规则</h2>
+			<label>&emsp;&ensp; 三人麻将点数计算方式&emsp;
+			<select id="sanma" name="sanma">
+				<option value="zimosun">自摸损</option>
+				<option value="beijiazheban">北家折半</option>
+				<option value="pingfen">平分</option>
+			</select></label>
+			&emsp;
+			<label>
+				<input type="checkbox" id="liujumanguan" class="checkbox-label">
+				<span class="checkbox-label">流局满贯</span>
+			</label>
+			&emsp;
+			<label>
+				<input type="checkbox" id="renhe" class="checkbox-label">
+				<span class="checkbox-label">人和</span>
+				<select id="renhe01" name="renhe01">
+					<option value="yiman">役满</option>
+					<option value="manguan">满贯</option>
+				</select>
+			</label>
+			&emsp;
+			<label>
+				<input type="checkbox" id="qieshangmanguan" class="checkbox-label">
+				<span class="checkbox-label">切上满贯</span>
+			</label>
+			&emsp;
+			<label>
+				<input type="checkbox" id="qingtianjing" class="checkbox-label">
+				<span class="checkbox-label">青天井</span>
+			</label>
+		
+		<h2>点数计算</h2>
+		<label>
+			<input type="checkbox" id="zhuangjia" class="checkbox-label">
+			<span class="checkbox-label">庄家</span>
+			<pre>&#09;</pre>
+			<input type="checkbox" id="zijia" class="checkbox-label">
+			<span class="checkbox-label">子家</span>
+			<pre>&#09;</pre>
+			<select id="wayofwin" name="wayofwin">
+				<option value="zimo">自摸</option>
+				<option value="dianhe">点和</option>
+			</select>
+			<pre>&#09;</pre>
+			<select id="humannum" name="humannum">
+				<option value="four">四人麻将</option>
+				<option value="three">三人麻将</option>
+			</select>
+		</label>
+		&emsp;
+		<div class="input-container"><label for="riichipoint">立直棒 &emsp;<input type="number" id="riichipoint"></label></div>
+		<div class="input-container"><label for="benchang">本场 &emsp;&emsp;<input type="number" id="benchang">&emsp;&emsp;&emsp;&emsp;<button onclick="recordInput()">计算</button></label></div>
+		&emsp;
+		<p>你获得了 <b><span id="fan">&emsp;</span></b> 番  <b><span id="fu">&emsp;</span></b> 符 &emsp; <b><span id="man"></span></b></p>
+		<p>你的得点是：<b><span id="get"></span></b></p>
+		<p>亲家支付：<b><span id="pay01">&emsp;</span></b> 子家支付：<b><span id="pay02">&emsp;</span></b> 放铳者支付：<b><span id="pay03">&emsp;</span></b></p>
+
+<script src="script.js"></script>
+	
+	<footer style="text-align: center;">
+		<pre>&#09;</pre>
+		Copyright &copy; <a href="https://wangquanlikun.github.io/">Wang Quan</a>
+	</footer>
+
+</body>
+</html>
